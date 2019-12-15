@@ -3,14 +3,14 @@
 
 public class Puzzle {
 
-    protected float SolvedPuzzle[][]; // matrix 9X9 with Puzzle elements
-    protected float PuzzleToSolve[][]; // matrix 9X9 (empty or with some elements) (It depents from the subclass)
+    protected int[][] SolvedPuzzle; // matrix 9X9 with Puzzle elements
+    protected int[][] PuzzleToSolve; // matrix 9X9 (empty or with some elements) (It depents from the subclass)
 
 
     public Puzzle() {
 
-        SolvedPuzzle = new float[9][9];
-        PuzzleToSolve = new float[9][9];
+        SolvedPuzzle = new int[9][9];
+        PuzzleToSolve = new int[9][9];
 
     }
 
@@ -29,14 +29,15 @@ public class Puzzle {
 
     /**
      * Ελέγχει αν η σωστή κίνηση του χρήστη ειναι σωστή
-     * και επιστρέφει Τrue ή Flase
+     * και επιστρέφει Τrue ή Flase.
+     * Θα χρησιμοποιηθεί απο τα γραφικά
      *
      * @param a       γραμμή SolvedPuzzle
      * @param b       στήλη SolvedPuzzle
      * @param element επιλογή παίκτη για το κελί
      * @return True or false
      */
-    public Boolean MoveChecker(int a, int b, float element) {
+    public Boolean MoveChecker(int a, int b, int element) {
         if (SolvedPuzzle[a][b] == element)
             return true;
         return false;
@@ -52,14 +53,25 @@ public class Puzzle {
      * @param j στήλη πίνακα
      * @param element στοιχείο για τοποθέτηση απο παίκτη
      */
-    public void Move(int i, int j, float element) {
-        float wrongElement;//για να διαχωρίζεται η λάθος τοποθέτηση στοιχείου απο τον παίκτη
+    public void Move(int i, int j, int element) {
+        /*int wrongElement;//για να διαχωρίζεται η λάθος τοποθέτηση στοιχείου απο τον παίκτη
         if (MoveChecker(i, j, element))
             PuzzleToSolve[i][j] = element;
-        wrongElement = (float) (element + 0.1);
-        PuzzleToSolve[i][j]=wrongElement;
+        wrongElement = element; */
+        PuzzleToSolve[i][j]=element;
 
+    }
 
+    /**
+     * Σε περίπτωση σωστά συμπληρωμένου sudoku επιστρεφει true, αλλιώς false
+     * @return
+     */
+    public boolean EndOfGame(){
+        if (SolvedPuzzle.equals(PuzzleToSolve)){
+            return true;
+        }
+        else
+            return false;
     }
 
 

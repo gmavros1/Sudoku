@@ -1,7 +1,12 @@
+
+
+
 public class Classic extends Puzzle{
+
+
     Classic(){
         super();
-        PuzzlesLoader("Classic.txt");
+        super.PuzzlesLoader("Classic.txt");
     }
 
 
