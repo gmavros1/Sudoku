@@ -54,10 +54,7 @@ public class Puzzle {
      * @param element στοιχείο για τοποθέτηση απο παίκτη
      */
     public void Move(int i, int j, int element) {
-        /*int wrongElement;//για να διαχωρίζεται η λάθος τοποθέτηση στοιχείου απο τον παίκτη
-        if (MoveChecker(i, j, element))
-            PuzzleToSolve[i][j] = element;
-        wrongElement = element; */
+
         PuzzleToSolve[i][j]=element;
 
     }
