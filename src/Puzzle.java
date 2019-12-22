@@ -70,8 +70,7 @@ public class Puzzle {
         if (SolvedPuzzle.equals(PuzzleToSolve)){
             return true;
         }
-        else
-            return false;
+        return false;
     }
 
 
