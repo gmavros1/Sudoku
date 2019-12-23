@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class General {
 
-    public ArrayList checkValidMove(int matrix[][], int len,  int a, int b){
+    public ArrayList checkValidMove(int[][] matrix, int len, int a, int b){
         ArrayList<Integer> moves;
         moves = new ArrayList<>();
 
@@ -20,8 +20,8 @@ public class General {
      return moves;
     }
 
-    private boolean CheckSthlh(int matrix[][],int len, int b, int i){
-        for( int j=0; j<9; i++){
+    private boolean CheckSthlh(int[][] matrix, int len, int b, int i){
+        for( int j=0; j<len; j++){
             if (i==matrix[j][b]){
                 return true;
             }
@@ -29,8 +29,8 @@ public class General {
         return false;
     }
 
-    private boolean CheckRaw(int matrix[][],int len, int a, int i){
-        for( int j=0; j<9; j++){
+    private boolean CheckRaw(int[][] matrix, int len, int a, int i){
+        for( int j=0; j<len; j++){
             if (i==matrix[a][j]){
                 return true;
             }
@@ -38,7 +38,7 @@ public class General {
         return false;
     }
 
-    private boolean squareint (int matrix[][],int len, int a,int b, int elemet){
+    private boolean squareint (int[][] matrix, int len, int a, int b, int elemet){
         int RawBegin = (int)Math.round(a - a%Math.sqrt(len));
         int ColBegin = (int)Math.round(b - b%Math.sqrt(len));
 
