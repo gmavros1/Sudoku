@@ -1,7 +1,6 @@
+import java.util.ArrayList;
 
-
-
-public class Puzzle {
+public class Puzzle extends General{
 
     protected int[][] SolvedPuzzle; // matrix 9X9 with Puzzle elements
     protected int[][] PuzzleToSolve; // matrix 9X9 (empty or with some elements) (It depents from the subclass)
@@ -46,16 +45,29 @@ public class Puzzle {
 
     /**
      * Eκχωρεί το στοιχείο element στην κατάλληλη θέση του πίνακα PuzzleToSolve
-     * αφού καλέσει την συνάρτηση MoveChecker για να ελέχξει την αν η κίνηση ειναι έγκυρη.
-     * Εάν όχι εκκτελεί τις κατάλληλες ενέργιες
+     * αφού καλέσει την συνάρτηση MoveChecker για να ελέχξει την αν η κίνηση ειναι σωστή.
+     * Εάν δεν είναι σωστή καλείται η συνάρτηση checkValidMove που κληρωνομείται απο την General,και ελεγχεται αν η κινηση ειναι εγκυρη
+     * συγκρίνοντας με την λίστα με τις έγκυρες κινήσεις.
      *
      * @param i γραμμή πίνακα
      * @param j στήλη πίνακα
      * @param element στοιχείο για τοποθέτηση απο παίκτη
      */
     public void Move(int i, int j, int element) {
-
-        PuzzleToSolve[i][j]=element;
+        ArrayList validmove=new ArrayList<>();
+        if(MoveChecker(i,j,element)) {
+            PuzzleToSolve[i][j] = element;
+        }
+        else{
+           validmove=checkValidMove(PuzzleToSolve,9,i,j);
+           for(int k=0;k<validmove.size();k++){
+               if(validmove.get(k).equals(element)){
+                   PuzzleToSolve[i][j]=element;
+                   break;
+               }
+           }
+        }
+        System.out.println("Not valid move");
 
     }
 

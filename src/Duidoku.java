@@ -1,7 +1,7 @@
 
 
 
-public class Duidoku {
+public class Duidoku extends General {
 
     private int[][] DuiBoard;
 
