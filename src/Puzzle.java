@@ -54,7 +54,7 @@ public class Puzzle extends General{
      * @param element στοιχείο για τοποθέτηση απο παίκτη
      */
     public void Move(int i, int j, int element) {
-        ArrayList validmove=new ArrayList<>();
+        ArrayList validmove = new ArrayList<Integer>();
         if(MoveChecker(i,j,element)) {
             PuzzleToSolve[i][j] = element;
         }
@@ -72,8 +72,7 @@ public class Puzzle extends General{
     }
 
     /**
-     * Σε περίπτωση σωστά συμπληρωμένου sudoku επιστρεφει true, αλλιώς false
-     * @return
+     * @return Σε περίπτωση σωστά συμπληρωμένου sudoku επιστρεφει true, αλλιώς false
      */
     public boolean EndOfGame(){
         if (SolvedPuzzle.equals(PuzzleToSolve)){

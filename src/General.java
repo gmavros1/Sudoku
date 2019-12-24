@@ -2,7 +2,17 @@ import java.util.ArrayList;
 
 public class General {
 
-    public ArrayList checkValidMove(int[][] matrix, int len, int a, int b){
+
+    /**
+     * Η συνάστηση καταχωρεί στο Αrraylist moves τις διαθέσιμες κινήσεις στο κελι (a, b) ελέγχοντας,
+     * όλους τους αριθμούς απο το 1 μεχρι το len, αν υπάρχουν σε γραμμή, στήλη ή τετράγωνο.
+     * @param matrix ο πίνακας που λύνεται
+     * @param len το μέγεθος του πίνακα
+     * @param a η γραμμή
+     * @param b η στήλη
+     * @return To Αrraylist moves με τις διαθέσιμες κινήσεις
+     */
+    public ArrayList<Integer> checkValidMove(int[][] matrix, int len, int a, int b){
         ArrayList<Integer> moves;
         moves = new ArrayList<>();
 
@@ -20,6 +30,14 @@ public class General {
      return moves;
     }
 
+    /**
+     * Ελέγχει εάν το στοιχείο i υπάρχει στην στήλη b
+     * @param matrix ο πίνακας που λύνεται
+     * @param len το μέγεθος του πίνακα
+     * @param b η στήλη
+     * @param i Ένα στοιχείο
+     * @return true αν υπάρχει false αν δεν υπάρχει
+     */
     private boolean CheckSthlh(int[][] matrix, int len, int b, int i){
         for( int j=0; j<len; j++){
             if (i==matrix[j][b]){
@@ -29,6 +47,14 @@ public class General {
         return false;
     }
 
+    /**
+     * Ελέγχει εάν το στοιχείο i υπάρχει στην γραμμή a
+     * @param matrix ο πίνακας που λύνεται
+     * @param len το μέγεθος του πίνακα
+     * @param a η στήλη
+     * @param i Ένα στοιχείο
+     * @return true αν υπάρχει false αν δεν υπάρχει
+     */
     private boolean CheckRaw(int[][] matrix, int len, int a, int i){
         for( int j=0; j<len; j++){
             if (i==matrix[a][j]){
@@ -38,9 +64,20 @@ public class General {
         return false;
     }
 
+
+    /**
+     * Ελέγχουμε την ύπαρξη του στοιχείου element στο υποτετράγωνο του πίνακα
+     * στο οποίο βρίσκεται.
+     * @param matrix ο πίνακας που λύνεται
+     * @param len το μέγεθος του πίνακα
+     * @param a η γραμμή
+     * @param b η στήλη
+     * @param elemet ένα στοιχείο
+     * @return To Αrraylist moves με τις διαθέσιμες κινήσεις
+     */
     private boolean squareint (int[][] matrix, int len, int a, int b, int elemet){
-        int RawBegin = (int)Math.round(a - a%Math.sqrt(len));
-        int ColBegin = (int)Math.round(b - b%Math.sqrt(len));
+        int RawBegin = (int)Math.round(a - a%Math.sqrt(len)); //Η γραμμη που ξεκινάει το τετράγωνο αναλογα με την γραμμη που βρισκομαστε και το μεγεθος του πίνακα
+        int ColBegin = (int)Math.round(b - b%Math.sqrt(len));//Η στηλη που ξεκινάει το τετράγωνο αναλογα με την στηλη που βρισκομαστε και το μεγεθος του πίνακα
 
         for (int i = RawBegin; i<Math.sqrt(len); i++){
             for (int j = ColBegin; j<Math.sqrt(len); j++){
