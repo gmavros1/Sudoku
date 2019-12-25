@@ -49,18 +49,21 @@ public class MainFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e){
         String points = e.getActionCommand();
-        if (points.equals("Classic Sudoku"))
-        {
-            ClassicFrame Classic = new ClassicFrame();
+        switch (points) {
+            case "Classic Sudoku":
 
-        }
-        else if (points.equals("Killer Sudoku"))
-        {
+                ClassicFrame Classic = new ClassicFrame();
+                frame.setVisible(false);
 
-        }
-        else if (points.equals("Duidoku"))
-        {
-
+                break;
+            case "Killer Sudoku":
+                KillerFrame killer = new KillerFrame();
+                frame.setVisible(false);
+                break;
+            case "Duidoku":
+                DuidokuFrame duidoku = new DuidokuFrame();
+                frame.setVisible(false);
+                break;
         }
     }
 

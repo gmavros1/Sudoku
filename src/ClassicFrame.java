@@ -13,10 +13,10 @@ public class ClassicFrame /*implements ActionListener */ {
 
     private void makeFrame(){
         frame = new JFrame("Classic Sudoku");
-        frame.setLayout(new BorderLayout(6,6));
+        frame.setLayout(new BorderLayout());
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300,300);
+        frame.setSize(600,600);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
