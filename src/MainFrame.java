@@ -29,11 +29,34 @@ public class MainFrame implements ActionListener {
         Container contentPane = frame.getContentPane();
 
         JPanel buttons = new JPanel();
-        buttons.add(classic);
-        buttons.add(killer);
-        buttons.add(duidoku);
+        buttons.setLayout(new GridBagLayout());
+        buttons.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+        GridBagConstraints gc = new GridBagConstraints();
+
+        //gc.anchor = GridBagConstraints.LINE_START;
+
+        gc.weightx = 0.5;
+        gc.weighty = 0.5;
+
+        gc.fill = GridBagConstraints.BOTH;
+        gc.gridx = 0;
+        gc.gridy = 0;
+        buttons.add(classic, gc);
+
+        gc.fill = GridBagConstraints.BOTH;
+        gc.gridx = 0;
+        gc.gridy = 1;
+        buttons.add(killer, gc);
+
+        gc.fill = GridBagConstraints.BOTH;
+        gc.gridx = 0;
+        gc.gridy = -1;
+        buttons.add(duidoku, gc);
+
 
         contentPane.add(buttons,BorderLayout.CENTER);
+
 
         classic.addActionListener(this);
         killer.addActionListener(this);
