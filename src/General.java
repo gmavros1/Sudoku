@@ -79,8 +79,8 @@ public class General {
         int RawBegin = (int)Math.round(a - a%Math.sqrt(len)); //Η γραμμη που ξεκινάει το τετράγωνο αναλογα με την γραμμη που βρισκομαστε και το μεγεθος του πίνακα
         int ColBegin = (int)Math.round(b - b%Math.sqrt(len));//Η στηλη που ξεκινάει το τετράγωνο αναλογα με την στηλη που βρισκομαστε και το μεγεθος του πίνακα
 
-        for (int i = RawBegin; i<Math.sqrt(len); i++){
-            for (int j = ColBegin; j<Math.sqrt(len); j++){
+        for (int i = RawBegin; i<Math.sqrt(len)+RawBegin; i++){
+            for (int j = ColBegin; j<Math.sqrt(len)+ColBegin; j++){
                 if (elemet == matrix[i][j])
                     return true;
             }
