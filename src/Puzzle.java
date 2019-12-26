@@ -6,6 +6,7 @@ public class Puzzle extends General{
     protected int[][] PuzzleToSolve; // matrix 9X9 (empty or with some elements) (It depents from the subclass)
 
 
+
     public Puzzle() {
 
         SolvedPuzzle = new int[9][9];
@@ -13,6 +14,12 @@ public class Puzzle extends General{
 
     }
 
+    /**
+     * getter για το τον πίνακα που φτιάχνουμε
+     */
+    public int[][] getPuzzleToSolve(){
+        return PuzzleToSolve;
+    }
 
     /**
      * Φόρτωση στοιχείων Puzzle από αρχείο κειμένου.
@@ -54,7 +61,7 @@ public class Puzzle extends General{
      * @param element στοιχείο για τοποθέτηση απο παίκτη
      */
     public void Move(int i, int j, int element) {
-        ArrayList validmove = new ArrayList<Integer>();
+        /*ArrayList validmove = new ArrayList<Integer>();
         if(MoveChecker(i,j,element)) {
             PuzzleToSolve[i][j] = element;
         }
@@ -63,12 +70,15 @@ public class Puzzle extends General{
            for(int k=0;k<validmove.size();k++){
                if(validmove.get(k).equals(element)){
                    PuzzleToSolve[i][j]=element;
+                   System.out.println("Not valid move");
                    break;
                }
            }
         }
-        System.out.println("Not valid move");
-
+        System.out.println("Not valid move");*/
+        if (checkValidMove(PuzzleToSolve, 9, i, j).contains(element)){
+            PuzzleToSolve[i][j] = element;
+        };
     }
 
     /**

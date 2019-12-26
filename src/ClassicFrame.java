@@ -1,18 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.awt.Color;
-import java.util.Scanner;
 
-public class ClassicFrame implements ActionListener  {
+public class ClassicFrame implements ActionListener, KeyListener {
 
     private JFrame frame;
     private JButton[][] board = new JButton [9][9];
     private int GAP = 3;
     private int sqrSide = 3;
     private int side = 9;
-    General classic;
+    private int a;
+    private int b;
+    Classic classic;
 
     ClassicFrame(){
         classic = new Classic();
@@ -63,6 +63,7 @@ public class ClassicFrame implements ActionListener  {
             }
 
 
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600,600);
         frame.setLocationRelativeTo(null);
@@ -72,18 +73,37 @@ public class ClassicFrame implements ActionListener  {
 
     public void actionPerformed(ActionEvent e){
         String choose = e.getActionCommand();
-        int i = Integer.parseInt(choose);
-        //System.out.println(choose);
-        Scanner input = new Scanner(System.in);
-        int keypressed;
-        keypressed = input.nextInt();
+        a = Integer.parseInt(choose)/10;
+        b = Integer.parseInt(choose)%10;
+        board[a][b].addKeyListener(this);
 
-        if (keypressed > 0 && keypressed < 10){
 
+    }
+
+    @Override
+    public void keyTyped(KeyEvent k) {
+        //System.out.println(keyEvent);
+        int element = k.getKeyChar() - '0';
+
+        if (element > 0 && element < 10){
+
+            if( classic.checkValidMove(classic.getPuzzleToSolve(),9,a, b).contains(element) ) {
+                classic.Move(a, b, element);
+                board[a][b].setText(Integer.toString(element));
+
+            }
         }
 
 
     }
 
+    @Override
+    public void keyPressed(KeyEvent k) {
 
+    }
+
+    @Override
+    public void keyReleased(KeyEvent k) {
+
+    }
 }
