@@ -17,8 +17,14 @@ public class MainFrame implements ActionListener {
 
     public MainFrame(){
             classic = new JButton("Classic Sudoku");
+            classic.setBackground(Color.pink);
+
             killer = new JButton("Killer Sudoku");
+            killer.setBackground(Color.gray);
+
             duidoku = new JButton("Duidoku");
+            duidoku.setBackground(Color.CYAN);
+
             this.makeFrame();
     }
 
