@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
  * Αρχική κλάση γραφικών όπου θα επιλέγεται ένα απο
  * τα τρία είδη παζλ
  */
-public class MainFrame implements ActionListener {
+public class MenuFrame implements ActionListener {
 
 
     private JFrame frame;
@@ -16,7 +16,7 @@ public class MainFrame implements ActionListener {
     private JButton duidoku;
     private JButton options;
 
-    public MainFrame(){
+    public MenuFrame(){
             classic = new JButton("Classic Sudoku");
             classic.setBackground(Color.pink);
 

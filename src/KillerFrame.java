@@ -3,21 +3,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class KillerFrame {
+public class KillerFrame extends GeneralFrame {
 
-    private JFrame frame;
+    Killer killer;
+
 
     KillerFrame(){
+        super(9, 3);
+        frame.setTitle("Killer Sudoku");
+        killer = new Killer();
         this.makeFrame();
     }
 
     private void makeFrame(){
-        frame = new JFrame("Killer Sudoku");
-        frame.setLayout(new BorderLayout());
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600,600);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
     }
 }
