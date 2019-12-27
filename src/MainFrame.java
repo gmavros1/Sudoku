@@ -14,6 +14,7 @@ public class MainFrame implements ActionListener {
     private JButton classic;
     private JButton killer;
     private JButton duidoku;
+    private JButton options;
 
     public MainFrame(){
             classic = new JButton("Classic Sudoku");
@@ -33,6 +34,11 @@ public class MainFrame implements ActionListener {
         frame.setLayout(new BorderLayout());
 
         Container contentPane = frame.getContentPane();
+
+        options = new JButton("Options");
+
+        JMenuBar mb = new JMenuBar();
+        mb.add(options);
 
         JPanel buttons = new JPanel();
         buttons.setLayout(new GridBagLayout());
@@ -61,6 +67,8 @@ public class MainFrame implements ActionListener {
         buttons.add(duidoku, gc);
 
 
+
+        contentPane.add(mb, BorderLayout.PAGE_START);
         contentPane.add(buttons,BorderLayout.CENTER);
 
 
@@ -70,7 +78,7 @@ public class MainFrame implements ActionListener {
 
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600,600);
+        frame.setSize(700,700);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
@@ -82,16 +90,15 @@ public class MainFrame implements ActionListener {
             case "Classic Sudoku":
 
                 ClassicFrame Classic = new ClassicFrame();
-                frame.setVisible(false);
-
+                frame.dispose();
                 break;
             case "Killer Sudoku":
                 KillerFrame killer = new KillerFrame();
-                frame.setVisible(false);
+                frame.dispose();
                 break;
             case "Duidoku":
                 DuidokuFrame duidoku = new DuidokuFrame();
-                frame.setVisible(false);
+                frame.dispose();
                 break;
         }
     }

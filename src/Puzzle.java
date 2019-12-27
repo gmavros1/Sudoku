@@ -34,7 +34,7 @@ public class Puzzle extends General{
     }
 
     /**
-     * Ελέγχει αν η σωστή κίνηση του χρήστη ειναι σωστή
+     * Ελέγχει αν η κίνηση του χρήστη ειναι σωστή
      * και επιστρέφει Τrue ή Flase.
      * Θα χρησιμοποιηθεί απο τα γραφικά
      *
@@ -61,21 +61,6 @@ public class Puzzle extends General{
      * @param element στοιχείο για τοποθέτηση απο παίκτη
      */
     public void Move(int i, int j, int element) {
-        /*ArrayList validmove = new ArrayList<Integer>();
-        if(MoveChecker(i,j,element)) {
-            PuzzleToSolve[i][j] = element;
-        }
-        else{
-           validmove=checkValidMove(PuzzleToSolve,9,i,j);
-           for(int k=0;k<validmove.size();k++){
-               if(validmove.get(k).equals(element)){
-                   PuzzleToSolve[i][j]=element;
-                   System.out.println("Not valid move");
-                   break;
-               }
-           }
-        }
-        System.out.println("Not valid move");*/
         if (checkValidMove(PuzzleToSolve, 9, i, j).contains(element)){
             PuzzleToSolve[i][j] = element;
         };
