@@ -16,6 +16,7 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
         classic = new Classic();
         classic.files();
         this.makeFrame();
+        classic.files();
 
     }
 

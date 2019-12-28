@@ -8,6 +8,7 @@ public class Classic extends Puzzle{
 
 
     }
+
     public void files() throws IOException {
             BufferedReader puf = new BufferedReader(new FileReader("classic"));
 

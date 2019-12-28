@@ -46,7 +46,7 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
         int element = k.getKeyChar() - '0';
 
 
-        if (duidoku.checkValidMove(duidoku.getDuiBoard(), 4, a, b).contains(element)){
+        if (duidoku.checkValidMove(duidoku.getDuiBoard(), 4, a, b).contains(element) && duidoku.getDuiBoard()[a][b] == 0 ){
             boolean flag = false; // winner flag
 
             duidoku.Move(a, b, element);

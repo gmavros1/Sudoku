@@ -38,15 +38,16 @@ public class Duidoku extends General {
     public String MchineMove(){
         int a;
         int b;
-        int element;
+        int element = 0;
         String r;
 
         do {
+
             a = ThreadLocalRandom.current().nextInt(0, 4 );
             b = ThreadLocalRandom.current().nextInt(0, 4 );
-            element = ThreadLocalRandom.current().nextInt(1, 5);
+            element = (element + 1) % 5 == 0 ? 1 : (element + 1) % 5  ;
             r = (a) + Integer.toString(b);
-        }while (!checkValidMove(DuiBoard, 4, a, b).contains(element));
+        }while (!checkValidMove(DuiBoard, 4, a, b).contains(element) && DuiBoard[a][b]!=0 );
         Move(a, b, element);
         return r;
     }
@@ -63,7 +64,7 @@ public class Duidoku extends General {
         for (int i=0;i<4;i++)
             for (int j=0;j<4;j++)
                 for (int element = 1; element<=4;element++){
-                    if (checkValidMove(DuiBoard, 4, i, j).contains(element))
+                    if (checkValidMove(DuiBoard, 4, i, j).contains(element) && DuiBoard[i][j]==0)
                         return false;
                 }
         return true;
