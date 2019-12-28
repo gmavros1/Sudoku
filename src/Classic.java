@@ -2,10 +2,10 @@ import java.io.*;
 import java.util.Random;
 
 public class Classic extends Puzzle{
-
+   public boolean locked[][];
     Classic() {
         super();
-
+        locked=new boolean[9][9];
 
     }
 
@@ -30,8 +30,15 @@ public class Classic extends Puzzle{
             String[] u=puf.readLine().trim().split(" ");
             for(int j=0;j<9;j++){
                 PuzzleToSolve[i][j]=Integer.parseInt(u[j]);
+                if(PuzzleToSolve[i][j]==0){
+                    locked[i][j]=true;
+                }
+                else{
+                    locked[i][j]=false;
+                }
             }
         }
+
         puf.close();
     }
 
