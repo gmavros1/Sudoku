@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /**
  * Αρχική κλάση γραφικών όπου θα επιλέγεται ένα απο
@@ -89,7 +90,11 @@ public class MenuFrame implements ActionListener {
         switch (points) {
             case "Classic Sudoku":
 
-                ClassicFrame Classic = new ClassicFrame();
+                try {
+                    ClassicFrame Classic = new ClassicFrame();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
                 frame.dispose();
                 break;
             case "Killer Sudoku":

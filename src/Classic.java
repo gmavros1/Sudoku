@@ -1,16 +1,16 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Random;
 
 public class Classic extends Puzzle{
 
-    Classic(){
+    Classic() {
         super();
+
 
     }
     public void files() throws IOException {
-        BufferedReader puf=new BufferedReader(new FileReader("Classic.txt"));
+            BufferedReader puf = new BufferedReader(new FileReader("classic"));
+
         Random ono=new Random(System.currentTimeMillis());
         int c;
         do{
@@ -33,6 +33,7 @@ public class Classic extends Puzzle{
         }
         puf.close();
     }
+
 
 
 
