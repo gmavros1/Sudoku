@@ -5,8 +5,10 @@ import java.awt.Color;
 
 public class ClassicFrame extends GeneralFrame implements ActionListener, KeyListener {
 
-    JButton check;
     Classic classic;
+    JButton check;
+    private JLabel help;
+    private JLabel move = new JLabel();
 
     ClassicFrame(){
         super(9, 3);
@@ -20,6 +22,10 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
 
         check = new JButton("Check");
         mb.add(check);
+        help = new JLabel("  For help press 'H' ->  ");
+        mb.add(help);
+        mb.add(move);
+
 
         for (int i=0; i<side; i++)
             for (int j=0; j<side; j++){
@@ -90,13 +96,23 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
                 board[a][b].setText(Integer.toString(element));
             }
         }
+
     }
 
     @Override
     public void keyPressed(KeyEvent k) {
+        if(k.getKeyChar() == 'h' || k.getKeyChar() == 'H'){
+            if(move.getText().equals("")){
+                for (int i = 0; i< classic.checkValidMove(classic.getPuzzleToSolve(),9,a, b).size() ; i++){
+                    move.setText( move.getText() + " " + classic.checkValidMove(classic.getPuzzleToSolve(),9,a, b).get(i));
+                }
+            }
+
+        }
     }
     @Override
     public void keyReleased(KeyEvent k) {
+        move.setText("");
     }
 
 }

@@ -5,5 +5,6 @@ public class Main {
 
         //System.out.println("Hello, let's play Sudoku!");
         MenuFrame start = new MenuFrame();
+
     }
 }
