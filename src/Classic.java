@@ -14,7 +14,7 @@ public class Classic extends Puzzle{
         Random ono=new Random(System.currentTimeMillis());
         int c;
         do{
-            c=(ono.nextInt(60)/6)*6;
+            c=(ono.nextInt(180)/18)*18;
         }while(c==0);
         for(int k=0;k<c;k++){
             puf.readLine();

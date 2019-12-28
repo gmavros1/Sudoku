@@ -22,7 +22,7 @@ public class Killer extends Puzzle {
         Random ono=new Random(System.currentTimeMillis());
         int c;
         do{
-            c=(ono.nextInt(30)/3)*3;
+            c=(ono.nextInt(90)/9)*9;
         }while(c==0);
         for(int k=0;k<c;k++){
             puf.readLine();
