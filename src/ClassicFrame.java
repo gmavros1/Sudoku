@@ -7,7 +7,6 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
 
     Classic classic;
     JButton check;
-    private JLabel help;
     private JLabel move = new JLabel();
 
     ClassicFrame(){
@@ -22,7 +21,7 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
 
         check = new JButton("Check");
         mb.add(check);
-        help = new JLabel("  For help press 'H' ->  ");
+        JLabel help = new JLabel("  For help hold 'H' ->  ");
         mb.add(help);
         mb.add(move);
 

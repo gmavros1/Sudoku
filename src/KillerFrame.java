@@ -9,7 +9,6 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
 
     Killer killer;
     JButton check;
-    private JLabel help;
     private JLabel move = new JLabel();
 
     KillerFrame(){
@@ -22,7 +21,7 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
     private void makeFrame(){
         check = new JButton("Check");
         mb.add(check);
-        help = new JLabel("  For help press 'H' ->  ");
+        JLabel help = new JLabel("  For help hold 'H' ->  ");
         mb.add(help);
         mb.add(move);
 

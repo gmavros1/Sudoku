@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Duidoku extends General {
@@ -11,39 +10,45 @@ public class Duidoku extends General {
     }
 
     /**
+     * @return duiboard
+     */
+    public int[][] getDuiBoard(){
+       return DuiBoard;
+    }
+
+
+
+    /**
      *  Η συναρτηση αυτή υλοποιεί την κίνηση του παίχτη.
      *  Καταχωρεί την επιλογή του στον πίνακα αφου ελεγξει την εγκυρώτητα της
      *  απο την συναρτηση ShowValidMoves της κλασης General.
      *  Επιστρέφει true ή false ανάλογα την εγκυρώτητα της κίνησης.
      */
-    public boolean Move(int a, int b, int element){
-        ArrayList<Integer> existance = super.checkValidMove(DuiBoard, 4, a, b);
-        if (existance.contains(element)){
+    public void Move(int a, int b, int element){
+        if (checkValidMove(DuiBoard, 4, a, b).contains(element))
             DuiBoard[a][b] = element;
-            return true;
-        }
-        return false;
-
     }
 
 
     /**
-     * Υλοποιεί την κίνηση του Μηχανηματος, περανώντας τυχαία ορισματα
+     * Υλοποιεί την κίνηση του Μηχανηματος, περνώντας τυχαία ορισματα
      * στις συνήθεις μεταβλητές. Ο έλεγχος της εγκυρώτητας, όπως και η
      * τελική καταχώρηση γίνεται μέσω της μεθόδου Μove.
-     *
      */
-    public void MchineMove(){
+    public String MchineMove(){
         int a;
         int b;
         int element;
+        String r;
 
         do {
-            a = ThreadLocalRandom.current().nextInt(1, 4 + 1);
-            b = ThreadLocalRandom.current().nextInt(1, 4 + 1);
-            element = ThreadLocalRandom.current().nextInt(1, 4 + 1);
-            Move(a, b, element);
-        }while (!Move(a, b, element));
+            a = ThreadLocalRandom.current().nextInt(0, 4 );
+            b = ThreadLocalRandom.current().nextInt(0, 4 );
+            element = ThreadLocalRandom.current().nextInt(1, 5);
+            r = (a) + Integer.toString(b);
+        }while (!checkValidMove(DuiBoard, 4, a, b).contains(element));
+        Move(a, b, element);
+        return r;
     }
 
 
@@ -58,7 +63,7 @@ public class Duidoku extends General {
         for (int i=0;i<4;i++)
             for (int j=0;j<4;j++)
                 for (int element = 1; element<=4;element++){
-                    if (Move(i, j, element))
+                    if (checkValidMove(DuiBoard, 4, i, j).contains(element))
                         return false;
                 }
         return true;
