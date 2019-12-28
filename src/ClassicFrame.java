@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.Color;
+import java.io.IOException;
 
 public class ClassicFrame extends GeneralFrame implements ActionListener, KeyListener {
 
@@ -9,11 +10,12 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
     JButton check;
     private JLabel move = new JLabel();
 
-    ClassicFrame(){
+    ClassicFrame() throws IOException {
         super(9, 3);
         frame.setTitle("Classic Sudoku");
         classic = new Classic();
         this.makeFrame();
+        classic.files();
 
     }
 

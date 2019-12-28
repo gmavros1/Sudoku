@@ -9,6 +9,7 @@ public class Classic extends Puzzle{
         super();
 
     }
+
     public void files() throws IOException {
         BufferedReader puf=new BufferedReader(new FileReader("Classic.txt"));
         Random ono=new Random(System.currentTimeMillis());
