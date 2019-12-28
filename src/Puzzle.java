@@ -14,23 +14,20 @@ public class Puzzle extends General{
 
     }
 
+
+    /**
+     * getter για τον λυμενο
+     * @return
+     */
+    public int[][] getSolvedPuzzle() {
+        return SolvedPuzzle;
+    }
+
     /**
      * getter για το τον πίνακα που φτιάχνουμε
      */
     public int[][] getPuzzleToSolve(){
         return PuzzleToSolve;
-    }
-
-    /**
-     * Φόρτωση στοιχείων Puzzle από αρχείο κειμένου.
-     * Εκχώρησή όλων των στοιχείων στον πινακα SolvedPuzzle
-     * και μερικών(ή κανενός) στον Πίνακα PuzzleToSolve
-     *
-     * @param file
-     */
-    protected void PuzzlesLoader(String file) {
-
-
     }
 
     /**

@@ -17,7 +17,6 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
         classic.files();
         this.makeFrame();
 
-
     }
 
     private void makeFrame(){
@@ -28,13 +27,11 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
         mb.add(help);
         mb.add(move);
 
-
         for (int i=0; i<side; i++)
             for (int j=0; j<side; j++){
                 if (classic.getPuzzleToSolve()[i][j]!=0)
                     board[i][j].setText(Integer.toString(classic.getPuzzleToSolve()[i][j]));
             }
-
 
         for (int i=0; i<side; i++)
             for (int j=0; j<side; j++){
@@ -44,8 +41,6 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
         check.addActionListener(this);
 
     }
-
-
 
 
     public void actionPerformed(ActionEvent e){
@@ -93,7 +88,7 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
     public void keyTyped(KeyEvent k) {
         int element = k.getKeyChar() - '0';
         if (element > 0 && element < 10){
-            if( classic.checkValidMove(classic.getPuzzleToSolve(),9,a, b).contains(element) ) {
+            if( classic.checkValidMove(classic.getPuzzleToSolve(),9,a, b).contains(element) && !classic.locked[a][b] ) {
                 classic.Move(a, b, element);
                 board[a][b].setText(Integer.toString(element));
             }
@@ -104,7 +99,7 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
     @Override
     public void keyPressed(KeyEvent k) {
         if(k.getKeyChar() == 'h' || k.getKeyChar() == 'H'){
-            if(move.getText().equals("")){
+            if(move.getText().equals("") && !classic.locked[a][b])   {
                 for (int i = 0; i< classic.checkValidMove(classic.getPuzzleToSolve(),9,a, b).size() ; i++){
                     move.setText( move.getText() + " " + classic.checkValidMove(classic.getPuzzleToSolve(),9,a, b).get(i));
                 }

@@ -13,6 +13,8 @@ public class GeneralFrame implements ActionListener {
     protected int b;
     protected JButton ng;
     protected JMenuBar mb;
+    protected Container contentPaneMain;
+
 
     GeneralFrame(int s, int sqr){
         side = s;
@@ -29,7 +31,7 @@ public class GeneralFrame implements ActionListener {
         frame.setLayout(new BorderLayout());
 
 
-        Container contentPaneMain = frame.getContentPane();
+        contentPaneMain = frame.getContentPane();
         contentPaneMain.setSize(700, 700);
 
         mb = new JMenuBar();

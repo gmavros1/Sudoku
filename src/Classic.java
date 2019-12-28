@@ -9,6 +9,11 @@ public class Classic extends Puzzle{
 
     }
 
+    /**
+     * Φόρτωση στοιχείων Puzzle από αρχείο κειμένου.
+     * Εκχώρησή όλων των στοιχείων στον πινακα SolvedPuzzle
+     * και μερικών(ή κανενός) στον Πίνακα PuzzleToSolve
+     */
     public void files() throws IOException {
             BufferedReader puf = new BufferedReader(new FileReader("classic"));
 
@@ -31,10 +36,10 @@ public class Classic extends Puzzle{
             for(int j=0;j<9;j++){
                 PuzzleToSolve[i][j]=Integer.parseInt(u[j]);
                 if(PuzzleToSolve[i][j]==0){
-                    locked[i][j]=true;
+                    locked[i][j]=false;
                 }
                 else{
-                    locked[i][j]=false;
+                    locked[i][j]=true;
                 }
             }
         }

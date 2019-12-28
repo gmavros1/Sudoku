@@ -1,9 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
+import java.awt.Color;
+import java.io.IOException;
 
 public class KillerFrame extends GeneralFrame implements ActionListener, KeyListener {
 
@@ -11,7 +10,7 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
     JButton check;
     private JLabel move = new JLabel();
 
-    KillerFrame(){
+    KillerFrame() {
         super(9, 3);
         frame.setTitle("Killer Sudoku");
         killer = new Killer();
@@ -37,6 +36,44 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
                 board[i][j].setActionCommand(i+""+j);
             }
         check.addActionListener(this);
+
+         this.colorsNsums();
+
+    }
+
+    private void colorsNsums(){
+
+        boolean[][] haveBennEncountered = new boolean[9][9];
+
+        int match;
+        int sum;
+
+        JMenuBar colorSums = new JMenuBar();
+        contentPaneMain.add(colorSums, BorderLayout.PAGE_END);
+        JLabel colors = new JLabel("Colors 'n Sums : ");
+        colorSums.add(colors);
+
+        for (int i=0; i<side; i++)
+            for (int j=0; j<side; j++){
+
+                sum = 0;
+                match = killer.getColours()[i][j];
+
+                for (int k = i; k<side; k++)
+                    for (int n = j; n<side; n++){
+
+                        if (killer.getColours()[k][n] == match && !haveBennEncountered[k][n] ){
+                            haveBennEncountered[k][n] = true;
+                            sum += killer.getSolvedPuzzle()[k][n];
+                        }
+
+                    }
+
+                JLabel finale = new JLabel();
+                colorSums.add(finale);
+                finale.setText("   " + sum + "   ");
+                finale.setBackground(new Color(20+5*sum, 0, 20 + i*j, 0 ));
+            }
 
     }
 

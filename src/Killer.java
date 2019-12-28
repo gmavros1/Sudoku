@@ -12,10 +12,24 @@ public class Killer extends Puzzle {
 
     Killer(){
         super();
-        super.PuzzlesLoader("killer.txt");
         Sums=new float[9][9];
         Colours=new int[9][9];
     }
+
+
+    /**
+     * getter gia
+     * @return Colors
+     */
+    public int[][] getColours() {
+        return Colours;
+    }
+
+    /**
+     * Φόρτωση στοιχείων Puzzle από αρχείο κειμένου.
+     * Εκχώρησή όλων των στοιχείων στον πινακα SolvedPuzzle
+     * και μερικών(ή κανενός) στον Πίνακα PuzzleToSolve
+     */
     public void files() throws IOException {
         float[][] Sums=new float[9][9];
         BufferedReader puf=new BufferedReader(new FileReader("Killer.txt"));
