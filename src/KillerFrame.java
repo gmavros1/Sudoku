@@ -58,7 +58,9 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
         JMenuBar colorSums = new JMenuBar();
         contentPaneMain.add(colorSums, BorderLayout.PAGE_END);
         JLabel colors = new JLabel("Colors 'n Sums : ");
+        colors.setForeground(Color.white);
         colorSums.add(colors);
+        colorSums.setBackground(Color.black);
 
 
         for (int i=0; i<side; i++)
@@ -90,14 +92,20 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
                                 haveBennEncountered[k][n] = true;
                                 sum = sum + killer.getSolvedPuzzle()[k][n];
                                 board[k][n].setBackground(random);
+
                             }
 
                         }
 
+                    String ssum = ( "|sum="+ (sum) +"|");
+                    board[i][j].setFont(new Font("Arial", Font.PLAIN, 9));
+                    board[i][j].setText(ssum);
+
                     JLabel finale = new JLabel();
                     colorSums.add(finale);
-                    finale.setText("   " + sum + "   ");
-                    finale.setBackground(random);
+                    finale.setForeground(random);
+                    finale.setText(sum + "|");
+
                 }
 
             }
@@ -146,12 +154,15 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
         board[a][b].addKeyListener(this);
     }
 
+
     @Override
     public void keyTyped(KeyEvent k) {
+
         int element = k.getKeyChar() - '0';
         if (element > 0 && element < 10){
             if( killer.checkValidMove(killer.getPuzzleToSolve(),9,a, b).contains(element) ) {
                 killer.Move(a, b, element);
+                board[a][b].setFont(new Font("Arial", Font.BOLD, 13));
                 board[a][b].setText(Integer.toString(element));
             }
         }
