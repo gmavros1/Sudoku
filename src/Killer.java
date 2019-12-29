@@ -31,7 +31,7 @@ public class Killer extends Puzzle {
      * και μερικών(ή κανενός) στον Πίνακα PuzzleToSolve
      */
     public void files() throws IOException {
-        float[][] Sums=new float[9][9];
+        Sums=new float[9][9];
         BufferedReader puf=new BufferedReader(new FileReader("killer"));
         Random ono=new Random(System.currentTimeMillis());
         int c;
@@ -45,25 +45,33 @@ public class Killer extends Puzzle {
             String[] u=puf.readLine().trim().split(" ");
             for(int j=0;j<9;j++){
                 Sums[i][j]= Float.valueOf(u[j]);
-                System.out.println(Sums[i][j]);
+                //System.out.println(Sums[i][j]);
             }
         }
 
         puf.close();
+
+        conversion();
     }
     public void conversion(){
-        System.out.println("sssss");
+        //System.out.println("sssss");
         for(int i=0;i<9;i++){
             for(int j=0;j<9;j++){
                 SolvedPuzzle[i][j]=(int)Sums[i][j];
-                Colours[i][j]=(int)((Sums[i][j]-SolvedPuzzle[i][j])*10);
+                Colours[i][j]=(int)(((Sums[i][j]-SolvedPuzzle[i][j])+ 0.0001)*100);
+                /*String splitedString = String.valueOf(Sums[i][j]);
+                int splitedNumber = splitedString.indexOf('.');
+                SolvedPuzzle[i][j] = splitedNumber;
+                Colours[i][j] = splitedNumber;*/
             }
         }
     }
-    public void show(){
+
+
+    /*public void show(){
         for(int i=0;i<9;i++){
             for(int j=0;j<9;j++){
-               System.out.println(SolvedPuzzle[i][j]+" "+Colours[i][j]);
+               System.out.println(SolvedPuzzle[i][j]+" "+Colours[i][j] + "    " + Sums[i][j]);
             }
         }
     }
@@ -73,7 +81,7 @@ public class Killer extends Puzzle {
         a.files();
         a.conversion();
         a.show();
-    }
+    }*/
 
 
 }

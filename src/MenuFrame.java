@@ -98,7 +98,11 @@ public class MenuFrame implements ActionListener {
                 frame.dispose();
                 break;
             case "Killer Sudoku":
-                KillerFrame killer = new KillerFrame();
+                try {
+                    KillerFrame killer = new KillerFrame();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
                 frame.dispose();
                 break;
             case "Duidoku":

@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.Color;
 import java.io.IOException;
+import java.util.Random;
 
 public class KillerFrame extends GeneralFrame implements ActionListener, KeyListener {
 
@@ -10,10 +11,11 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
     JButton check;
     private JLabel move = new JLabel();
 
-    KillerFrame() {
+    KillerFrame() throws IOException {
         super(9, 3);
         frame.setTitle("Killer Sudoku");
         killer = new Killer();
+        killer.files();
         this.makeFrame();
     }
 
@@ -37,13 +39,18 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
             }
         check.addActionListener(this);
 
-         this.colorsNsums();
+        this.colorsNsums();
+
 
     }
 
     private void colorsNsums(){
 
         boolean[][] haveBennEncountered = new boolean[9][9];
+
+        for (int i=0; i<side; i++)
+            for (int j=0; j<side; j++)
+                haveBennEncountered[i][j] =false;
 
         int match;
         int sum;
@@ -53,26 +60,46 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
         JLabel colors = new JLabel("Colors 'n Sums : ");
         colorSums.add(colors);
 
+
         for (int i=0; i<side; i++)
             for (int j=0; j<side; j++){
 
+                Color random ;
                 sum = 0;
-                match = killer.getColours()[i][j];
+                if (!haveBennEncountered[i][j]){
+                    match = killer.getColours()[i][j];
 
-                for (int k = i; k<side; k++)
-                    for (int n = j; n<side; n++){
+                    Random rand1 = new Random();
+                    int ena = rand1.nextInt(151)+100;
 
-                        if (killer.getColours()[k][n] == match && !haveBennEncountered[k][n] ){
-                            haveBennEncountered[k][n] = true;
-                            sum += killer.getSolvedPuzzle()[k][n];
+                    Random rand2 = new Random();
+                    int einai = rand2.nextInt(151)+100;
+
+                    Random rand3 = new Random();
+                    int taidoni = rand3.nextInt(151)+100;
+
+
+                    random = new Color( ena, einai, taidoni);
+
+
+
+                    for (int k = i; k<side; k++)
+                        for (int n = j; n<side; n++){
+
+                            if (killer.getColours()[k][n] == match && !haveBennEncountered[k][n] ){
+                                haveBennEncountered[k][n] = true;
+                                sum = sum + killer.getSolvedPuzzle()[k][n];
+                                board[k][n].setBackground(random);
+                            }
+
                         }
 
-                    }
+                    JLabel finale = new JLabel();
+                    colorSums.add(finale);
+                    finale.setText("   " + sum + "   ");
+                    finale.setBackground(random);
+                }
 
-                JLabel finale = new JLabel();
-                colorSums.add(finale);
-                finale.setText("   " + sum + "   ");
-                finale.setBackground(new Color(20+5*sum, 0, 20 + i*j, 0 ));
             }
 
     }
