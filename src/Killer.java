@@ -1,8 +1,8 @@
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
+//import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Random;
+//import java.util.Random;
 
 public class Killer extends Puzzle {
 
@@ -33,8 +33,8 @@ public class Killer extends Puzzle {
     public void files() throws IOException {
         Sums=new float[9][9];
         BufferedReader puf=new BufferedReader(new FileReader("killer"));
-        Random ono=new Random(System.currentTimeMillis());
-        int c;
+        //Random ono=new Random(System.currentTimeMillis());
+        //int c;
        /* do{
             c=(ono.nextInt(63)/9)*9;
         }while(c==0);
@@ -44,7 +44,7 @@ public class Killer extends Puzzle {
         for(int i=0;i<9;i++){
             String[] u=puf.readLine().trim().split(" ");
             for(int j=0;j<9;j++){
-                Sums[i][j]= Float.valueOf(u[j]);
+                Sums[i][j]= Float.parseFloat(u[j]);
                 //System.out.println(Sums[i][j]);
             }
         }
