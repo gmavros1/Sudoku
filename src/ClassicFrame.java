@@ -9,9 +9,11 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
     Classic classic;
     JButton check;
     private JLabel move = new JLabel();
+    private boolean wordoku;
 
-    ClassicFrame() throws IOException {
+    ClassicFrame(boolean w) throws IOException {
         super(9, 3);
+        wordoku = w;
         frame.setTitle("Classic Sudoku");
         classic = new Classic();
         classic.files();
@@ -30,6 +32,12 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
         for (int i=0; i<side; i++)
             for (int j=0; j<side; j++){
                 if (classic.getPuzzleToSolve()[i][j]!=0)
+                    //*****wordoku option*****//
+                    if (wordoku){
+                        board[i][j].setText( String.valueOf(classic.Wordoku(classic.getPuzzleToSolve(), 9)[i][j]));
+                    }
+                    //*****wordoku option*****//
+                else
                     board[i][j].setText(Integer.toString(classic.getPuzzleToSolve()[i][j]));
             }
 
@@ -63,7 +71,7 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
             }
             else {
                 JDialog d = new JDialog(frame,"LOSER LOSER CHICKEN DINNER ? ");
-                JLabel l = new JLabel("TRY AGAIN !!!");
+                JLabel l = new JLabel("NEXT TIME ...");
                 d.add(l, BorderLayout.CENTER);
                 d.setSize(400, 50);
                 d.setLocationRelativeTo(null);
@@ -86,13 +94,29 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
 
     @Override
     public void keyTyped(KeyEvent k) {
-        int element = k.getKeyChar() - '0';
-        if (element > 0 && element < 10){
-            if( classic.checkValidMove(classic.getPuzzleToSolve(),9,a, b).contains(element) && !classic.locked[a][b] ) {
-                classic.Move(a, b, element);
-                board[a][b].setText(Integer.toString(element));
+        //*****wordoku option*****//
+        if (wordoku){
+            if ( "ABCDEFGHI".contains(String.valueOf(k.getKeyChar())) ){
+                if( classic.checkValidMove(classic.getPuzzleToSolve(),9,a, b).contains(classic.WorToSuElement(k.getKeyChar())) && !classic.locked[a][b] ){
+                    classic.Move(a, b, classic.WorToSuElement(k.getKeyChar()));
+                    board[a][b].setFont(new Font("Arial", Font.ITALIC, 14));
+                    board[a][b].setText(String.valueOf(k.getKeyChar()));
+                }
             }
         }
+        //*****wordoku option*****//
+        else {
+            int element = k.getKeyChar() - '0';
+            if (element > 0 && element < 10){
+                if( classic.checkValidMove(classic.getPuzzleToSolve(),9,a, b).contains(element) && !classic.locked[a][b] ) {
+                    classic.Move(a, b, element);
+                    board[a][b].setFont(new Font("Arial", Font.ITALIC, 14));
+                    board[a][b].setText(Integer.toString(element));
+                }
+            }
+
+        }
+
 
     }
 
@@ -101,7 +125,12 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
         if(k.getKeyChar() == 'h' || k.getKeyChar() == 'H'){
             if(move.getText().equals("") && !classic.locked[a][b])   {
                 for (int i = 0; i< classic.checkValidMove(classic.getPuzzleToSolve(),9,a, b).size() ; i++){
-                    move.setText( move.getText() + " " + classic.checkValidMove(classic.getPuzzleToSolve(),9,a, b).get(i));
+                    //*****wordoku option*****//
+                    if (wordoku)
+                        move.setText( move.getText() + " " + classic.WordokuElement(classic.checkValidMove(classic.getPuzzleToSolve(),9,a, b).get(i)) );
+                    //*****wordoku option*****//
+                    else
+                        move.setText( move.getText() + " " + classic.checkValidMove(classic.getPuzzleToSolve(),9,a, b).get(i));
                 }
             }
 

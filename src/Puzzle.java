@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Puzzle extends General{
 
@@ -67,7 +68,7 @@ public class Puzzle extends General{
      * @return Σε περίπτωση σωστά συμπληρωμένου sudoku επιστρεφει true, αλλιώς false
      */
     public boolean EndOfGame(){
-        if (SolvedPuzzle.equals(PuzzleToSolve)){
+        if (Arrays.deepEquals(SolvedPuzzle, PuzzleToSolve)){
             return true;
         }
         return false;

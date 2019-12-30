@@ -15,7 +15,12 @@ public class MenuFrame implements ActionListener {
     private JButton classic;
     private JButton killer;
     private JButton duidoku;
-    private JButton options;
+    private boolean wordoku;
+
+    JDialog optionsD ;
+    JLabel wrdku ;
+    JButton wurdokuButton ;
+
 
     public MenuFrame(){
             classic = new JButton("Classic Sudoku");
@@ -27,6 +32,8 @@ public class MenuFrame implements ActionListener {
             duidoku = new JButton("Duidoku");
             duidoku.setBackground(Color.CYAN);
 
+            wordoku = false;
+
             this.makeFrame();
     }
 
@@ -36,7 +43,7 @@ public class MenuFrame implements ActionListener {
 
         Container contentPane = frame.getContentPane();
 
-        options = new JButton("Options");
+        JButton options = new JButton("Options");
 
         JMenuBar mb = new JMenuBar();
         mb.add(options);
@@ -76,6 +83,7 @@ public class MenuFrame implements ActionListener {
         classic.addActionListener(this);
         killer.addActionListener(this);
         duidoku.addActionListener(this);
+        options.addActionListener(this);
 
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,13 +93,50 @@ public class MenuFrame implements ActionListener {
 
     }
 
+    private void optionsDialog(){
+        optionsD = new JDialog();
+        wrdku = new JLabel();
+        wurdokuButton = new JButton("OFF");
+
+        optionsD.setTitle("Options");
+        optionsD.setSize(600, 200);
+        optionsD.setLocationRelativeTo(null);
+
+        wrdku.setText(" Wordoku Mode : ");
+        wurdokuButton.setActionCommand("Wordoku");
+
+        optionsD.setLayout( new GridBagLayout());
+        GridBagConstraints gc = new GridBagConstraints();
+
+        gc.weightx = 0.5;
+        gc.weighty = 0.5;
+
+        //gc.fill = GridBagConstraints.BOTH;
+        gc.gridx = 0;
+        gc.gridy = 0;
+        optionsD.add(wrdku, gc);
+
+        gc.weightx = 0.5;
+        gc.weighty = 0.5;
+
+        //gc.fill = GridBagConstraints.BOTH;
+        gc.gridx = 1;
+        gc.gridy = 0;
+        optionsD.add(wurdokuButton, gc);
+
+        wurdokuButton.addActionListener(this);
+
+        optionsD.setVisible(true);
+
+    }
+
     public void actionPerformed(ActionEvent e){
         String points = e.getActionCommand();
         switch (points) {
             case "Classic Sudoku":
 
                 try {
-                    ClassicFrame Classic = new ClassicFrame();
+                    ClassicFrame Classic = new ClassicFrame(wordoku);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -99,16 +144,28 @@ public class MenuFrame implements ActionListener {
                 break;
             case "Killer Sudoku":
                 try {
-                    KillerFrame killer = new KillerFrame();
+                    KillerFrame killer = new KillerFrame(wordoku);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
                 frame.dispose();
                 break;
             case "Duidoku":
-                DuidokuFrame duidoku = new DuidokuFrame();
+                DuidokuFrame duidoku = new DuidokuFrame(wordoku);
                 frame.dispose();
                 break;
+            case "Options":
+                this.optionsDialog();
+                break;
+            case "Wordoku":
+                if (!wordoku){
+                    wordoku = true;
+                    wurdokuButton.setText("ON");
+                }
+                else{
+                    wordoku = false;
+                    wurdokuButton.setText("OFF");
+                }
         }
     }
 

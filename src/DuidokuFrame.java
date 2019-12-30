@@ -9,9 +9,11 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
 
     Duidoku duidoku;
     private JLabel move = new JLabel();
+    private boolean wordoku;
 
-    DuidokuFrame(){
+    DuidokuFrame(boolean w){
         super(4, 2);
+        wordoku = w;
         frame.setTitle("Duidoku");
         duidoku = new Duidoku();
         this.makeFrame();
@@ -46,11 +48,19 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
         int element = k.getKeyChar() - '0';
 
 
-        if (duidoku.checkValidMove(duidoku.getDuiBoard(), 4, a, b).contains(element) && !duidoku.locked[a][b] ){
+        if ( (duidoku.checkValidMove(duidoku.getDuiBoard(), 4, a, b).contains(element)  || duidoku.checkValidMove(duidoku.getDuiBoard(), 4, a, b).contains(duidoku.WorToSuElement(k.getKeyChar()))) && !duidoku.locked[a][b] ){
             boolean flag = false; // wining situation flag
 
-            duidoku.Move(a, b, element);
-            board[a][b].setText(Integer.toString(element));
+            //*****wordoku option*****//
+            if (wordoku){
+                duidoku.Move(a, b, duidoku.WorToSuElement(k.getKeyChar()));
+                board[a][b].setText(String.valueOf(k.getKeyChar()));
+            }
+            //*****wordoku option*****//
+            else {
+                duidoku.Move(a, b, element);
+                board[a][b].setText(Integer.toString(element));
+            }
             lockeElements();
 
             //εαν δεν υπήρχαν διαθέσιμες κινήσεις για την μηχανί το παιχνίδι θα τελειωνε εδω
@@ -69,12 +79,17 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
                 String choose = duidoku.MchineMove();
                 a = Integer.parseInt(choose)/10;
                 b = Integer.parseInt(choose)%10;
-                board[a][b].setText(Integer.toString(duidoku.getDuiBoard()[a][b]));
+                //*****wordoku option*****//
+                if (wordoku)
+                    board[a][b].setText(String.valueOf(duidoku.WordokuElement(duidoku.getDuiBoard()[a][b])));
+                //*****wordoku option*****//
+                else
+                    board[a][b].setText(Integer.toString(duidoku.getDuiBoard()[a][b]));
                 lockeElements();
 
-                if (duidoku.NoAvailableMoves() && !flag){
+                if (duidoku.NoAvailableMoves() ){
                     JDialog d = new JDialog(frame,"LOSER LOSER CHICKEN DINNER ? ");
-                    JLabel l = new JLabel("TRY AGAIN !!!");
+                    JLabel l = new JLabel(" NEXT TIME  ...");
                     d.add(l, BorderLayout.CENTER);
                     d.setSize(400, 50);
                     d.setLocationRelativeTo(null);
@@ -110,7 +125,12 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
         if(k.getKeyChar() == 'h' || k.getKeyChar() == 'H'){
             if(move.getText().equals("") && duidoku.getDuiBoard()[a][b]==0 ){
                 for (int i = 0; i< duidoku.checkValidMove(duidoku.getDuiBoard(),4,a, b).size() ; i++){
-                    move.setText( move.getText() + " " + duidoku.checkValidMove(duidoku.getDuiBoard(),4,a, b).get(i));
+                    //*****wordoku option*****//
+                    if (wordoku)
+                        move.setText( move.getText() + " " + duidoku.WordokuElement(duidoku.checkValidMove(duidoku.getDuiBoard(),4,a, b).get(i)) );
+                    //*****wordoku option*****//
+                    else
+                        move.setText( move.getText() + " " + duidoku.checkValidMove(duidoku.getDuiBoard(),4,a, b).get(i));
                 }
             }
 

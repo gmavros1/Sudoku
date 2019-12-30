@@ -10,9 +10,11 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
     Killer killer;
     JButton check;
     private JLabel move = new JLabel();
+    private boolean wordoku;
 
-    KillerFrame() throws IOException {
+    KillerFrame(boolean w) throws IOException {
         super(9, 3);
+        wordoku = w;
         frame.setTitle("Killer Sudoku");
         killer = new Killer();
         killer.files();
@@ -22,15 +24,15 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
     private void makeFrame(){
         check = new JButton("Check");
         mb.add(check);
-        JLabel help = new JLabel("  For help hold 'H' ->  ");
+        JLabel help = new JLabel("  For help hold 'h' ->  ");
         mb.add(help);
         mb.add(move);
 
-        for (int i=0; i<side; i++)
+        /*for (int i=0; i<side; i++)
             for (int j=0; j<side; j++){
                 if (killer.getPuzzleToSolve()[i][j]!=0)
                     board[i][j].setText(Integer.toString(killer.getPuzzleToSolve()[i][j]));
-            }
+            }*/
 
         for (int i=0; i<side; i++)
             for (int j=0; j<side; j++){
@@ -133,7 +135,7 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
             }
             else {
                 JDialog d = new JDialog(frame,"LOSER LOSER CHICKEN DINNER ? ");
-                JLabel l = new JLabel("TRY AGAIN !!!");
+                JLabel l = new JLabel(" NEXT TIME  ...");
                 d.add(l, BorderLayout.CENTER);
                 d.setSize(400, 50);
                 d.setLocationRelativeTo(null);
@@ -157,13 +159,26 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
 
     @Override
     public void keyTyped(KeyEvent k) {
+        //*****wordoku option*****//
+        if (wordoku){
+            if ( "ABCDEFGHI".contains(String.valueOf(k.getKeyChar())) ){
+                if( killer.checkValidMove(killer.getPuzzleToSolve(),9,a, b).contains(killer.WorToSuElement(k.getKeyChar()))){
+                    killer.Move(a, b, killer.WorToSuElement(k.getKeyChar()));
+                    board[a][b].setFont(new Font("Arial", Font.BOLD, 13));
+                    board[a][b].setText(String.valueOf(k.getKeyChar()));
+                }
+            }
+        }
+        //*****wordoku option*****//
+        else {
+            int element = k.getKeyChar() - '0';
+            if (element > 0 && element < 10){
+                if( killer.checkValidMove(killer.getPuzzleToSolve(),9,a, b).contains(element) ) {
+                    killer.Move(a, b, element);
+                    board[a][b].setFont(new Font("Arial", Font.BOLD, 13));
+                    board[a][b].setText(Integer.toString(element));
+                }
 
-        int element = k.getKeyChar() - '0';
-        if (element > 0 && element < 10){
-            if( killer.checkValidMove(killer.getPuzzleToSolve(),9,a, b).contains(element) ) {
-                killer.Move(a, b, element);
-                board[a][b].setFont(new Font("Arial", Font.BOLD, 13));
-                board[a][b].setText(Integer.toString(element));
             }
         }
 
@@ -171,10 +186,15 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
 
     @Override
     public void keyPressed(KeyEvent k) {
-        if(k.getKeyChar() == 'h' || k.getKeyChar() == 'H'){
+        if(k.getKeyChar() == 'h' ){
             if(move.getText().equals("")){
                 for (int i = 0; i< killer.checkValidMove(killer.getPuzzleToSolve(),9,a, b).size() ; i++){
-                    move.setText( move.getText() + " " + killer.checkValidMove(killer.getPuzzleToSolve(),9,a, b).get(i));
+                    //*****wordoku option*****//
+                    if (wordoku)
+                        move.setText( move.getText() + " " + killer.WordokuElement(killer.checkValidMove(killer.getPuzzleToSolve(),9,a, b).get(i)) );
+                        //*****wordoku option*****//
+                    else
+                        move.setText( move.getText() + " " + killer.checkValidMove(killer.getPuzzleToSolve(),9,a, b).get(i));
                 }
             }
 
