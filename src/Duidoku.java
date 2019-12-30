@@ -1,12 +1,15 @@
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Duidoku extends General {
 
     private int[][] DuiBoard;
+    protected boolean[][] locked = new boolean[9][9]; //useless squares
 
     Duidoku(){
 
         DuiBoard = new int[4][4];
+
     }
 
     /**
@@ -25,9 +28,37 @@ public class Duidoku extends General {
      *  Επιστρέφει true ή false ανάλογα την εγκυρώτητα της κίνησης.
      */
     public void Move(int a, int b, int element){
-        if (checkValidMove(DuiBoard, 4, a, b).contains(element))
+        if (checkValidMove(DuiBoard, 4, a, b).contains(element) && !locked[a][b] ){
             DuiBoard[a][b] = element;
+            locked[a][b] = true;
+        }
+
     }
+
+
+    /**
+     * Υλοποιεί την κίνηση του Μηχανηματος, περνώντας τυχαία ορισματα
+     * στις συνήθεις μεταβλητές. Ο έλεγχος της εγκυρώτητας, όπως και η
+     * τελική καταχώρηση γίνεται μέσω της μεθόδου Μove.
+
+    public String MchineMove(){
+        int a;
+        int b;
+        int element = -1;
+        String r;
+
+        do {
+            element +=1;
+            a = ThreadLocalRandom.current().nextInt(0, 4 );
+            b = ThreadLocalRandom.current().nextInt(0, 4 );
+            element = (element + 1) % 5 == 0 ? 1 : (element + 1) % 5  ;
+            r = (a) + Integer.toString(b);
+
+        }while (!checkValidMove(DuiBoard, 4, a, b).contains(element) && locked[a][b] );
+        Move(a, b, element);
+        return r;
+    }*/
+
 
 
     /**
@@ -36,21 +67,23 @@ public class Duidoku extends General {
      * τελική καταχώρηση γίνεται μέσω της μεθόδου Μove.
      */
     public String MchineMove(){
-        int a;
-        int b;
-        int element = 0;
         String r;
-
         do {
+            Random rand1 = new Random(System.currentTimeMillis());
+            int element = rand1.nextInt(4)+1;
+            for (int a = 0; a < 4 ; a++)
+                for (int b = 3; b >= 0; b-- )
+                    if (checkValidMove(DuiBoard, 4, a, b).contains(element) &&!locked[a][b]){
+                        Move(a, b, element);
+                        r = (a) + Integer.toString(b);
+                        return r;
+                    }
 
-            a = ThreadLocalRandom.current().nextInt(0, 4 );
-            b = ThreadLocalRandom.current().nextInt(0, 4 );
-            element = (element + 1) % 5 == 0 ? 1 : (element + 1) % 5  ;
-            r = (a) + Integer.toString(b);
-        }while (!checkValidMove(DuiBoard, 4, a, b).contains(element) && DuiBoard[a][b]!=0 );
-        Move(a, b, element);
-        return r;
+        }while (true);
+
+
     }
+
 
 
     /**
