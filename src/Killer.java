@@ -9,13 +9,11 @@ public class Killer extends Puzzle {
 
     private float[][] Sums;
     private int[][] Colours;
-    nickname player;
 
     Killer(){
         super();
         Sums=new float[9][9];
         Colours=new int[9][9];
-        player=new nickname();
     }
 
 

@@ -2,11 +2,10 @@ import java.io.*;
 import java.util.Random;
 
 public class Classic extends Puzzle{
-nickname player;
+
    public boolean locked[][];
     Classic() {
         super();
-        player=new nickname();
         locked=new boolean[9][9];
 
     }

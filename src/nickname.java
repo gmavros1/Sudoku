@@ -8,12 +8,14 @@ public class nickname {
     List classicList;
     List killerList;
 
-    nickname() {
+    nickname(String n) {
         classicList = new ArrayList();
         killerList = new ArrayList();
         Scanner keyboard = new Scanner(System.in);
-        System.out.println("Whats ur name?");
-        name = keyboard.nextLine();
+        name = n;
+    }
+    nickname(){
+       name=null;
     }
 
     public boolean hasPlayed() throws IOException {

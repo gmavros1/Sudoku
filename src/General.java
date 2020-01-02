@@ -2,7 +2,13 @@ import java.util.ArrayList;
 
 public class General {
 
-
+nickname player;
+     General(String name){
+    player=new nickname(name);
+    }
+    General(){
+        player=new nickname(null);
+    }
     /**
      * Η συνάστηση καταχωρεί στο Αrraylist moves τις διαθέσιμες κινήσεις στο κελι (a, b) ελέγχοντας,
      * όλους τους αριθμούς απο το 1 μεχρι το len, αν υπάρχουν σε γραμμή, στήλη ή τετράγωνο.
