@@ -2,18 +2,20 @@ import java.io.BufferedReader;
 //import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Random;
 //import java.util.Random;
 
 public class Killer extends Puzzle {
 
     private float[][] Sums;
     private int[][] Colours;
-
+    nickname player;
 
     Killer(){
         super();
         Sums=new float[9][9];
         Colours=new int[9][9];
+        player=new nickname();
     }
 
 
@@ -33,14 +35,18 @@ public class Killer extends Puzzle {
     public void files() throws IOException {
         Sums=new float[9][9];
         BufferedReader puf=new BufferedReader(new FileReader("killer"));
-        //Random ono=new Random(System.currentTimeMillis());
-        //int c;
-       /* do{
-            c=(ono.nextInt(63)/9)*9;
-        }while(c==0);
+        Random ono=new Random(System.currentTimeMillis());
+        int c;
+       do{
+            do {
+                c = (ono.nextInt(90) / 9) * 9;
+            } while (c == 0);
+        }while(player.playedKiller(c));
+        player.newDataClassic(c);
+
         for(int k=0;k<c;k++){
             puf.readLine();
-        }*/
+        }
         for(int i=0;i<9;i++){
             String[] u=puf.readLine().trim().split(" ");
             for(int j=0;j<9;j++){

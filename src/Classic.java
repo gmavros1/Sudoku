@@ -2,9 +2,11 @@ import java.io.*;
 import java.util.Random;
 
 public class Classic extends Puzzle{
+nickname player;
    public boolean locked[][];
     Classic() {
         super();
+        player=new nickname();
         locked=new boolean[9][9];
 
     }
@@ -15,13 +17,15 @@ public class Classic extends Puzzle{
      * και μερικών(ή κανενός) στον Πίνακα PuzzleToSolve
      */
     public void files() throws IOException {
-            BufferedReader puf = new BufferedReader(new FileReader("classic"));
-
+        BufferedReader puf = new BufferedReader(new FileReader("classic"));
         Random ono=new Random(System.currentTimeMillis());
-        int c;
-        do{
-            c=(ono.nextInt(180)/18)*18;
-        }while(c==0);
+        int c=-1;
+       do {
+            do {
+                c = (ono.nextInt(180) / 18) * 18;
+            } while (c == 0);
+        }while(player.playedKiller(c));
+        player.newDataClassic(c);
         for(int k=0;k<c;k++){
             puf.readLine();
         }
@@ -31,6 +35,7 @@ public class Classic extends Puzzle{
                 SolvedPuzzle[i][j]=Integer.parseInt(u[j]);
             }
         }
+
         for(int i=0;i<9;i++){
             String[] u=puf.readLine().trim().split(" ");
             for(int j=0;j<9;j++){
