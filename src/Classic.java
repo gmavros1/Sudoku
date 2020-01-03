@@ -2,12 +2,18 @@ import java.io.*;
 import java.util.Random;
 
 public class Classic extends Puzzle{
+    public boolean locked[][];
+    public nickname player;
+    Classic(String n) {
+        super();
+        locked=new boolean[9][9];
+        player=new nickname(n);
+    }
 
-   public boolean locked[][];
     Classic() {
         super();
         locked=new boolean[9][9];
-
+        player=new nickname();
     }
 
     /**
@@ -18,12 +24,12 @@ public class Classic extends Puzzle{
     public void files() throws IOException {
         BufferedReader puf = new BufferedReader(new FileReader("classic"));
         Random ono=new Random(System.currentTimeMillis());
-        int c=-1;
+        int c;
        do {
             do {
                 c = (ono.nextInt(180) / 18) * 18;
             } while (c == 0);
-        }while(player.playedKiller(c));
+        }while(!(player.playedKiller(c)));
         player.newDataClassic(c);
         for(int k=0;k<c;k++){
             puf.readLine();

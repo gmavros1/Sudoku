@@ -9,13 +9,19 @@ public class Killer extends Puzzle {
 
     private float[][] Sums;
     private int[][] Colours;
-
+    private nickname player;
+    Killer(String n){
+        super();
+        Sums=new float[9][9];
+        Colours=new int[9][9];
+        player=new nickname(n);
+    }
     Killer(){
         super();
         Sums=new float[9][9];
         Colours=new int[9][9];
+        player=new nickname();
     }
-
 
     /**
      * getter gia
@@ -39,8 +45,8 @@ public class Killer extends Puzzle {
             do {
                 c = (ono.nextInt(90) / 9) * 9;
             } while (c == 0);
-        }while(player.playedKiller(c));
-        player.newDataClassic(c);
+        }while(!(player.playedKiller(c)));
+        player.newDataKiller(c);
 
         for(int k=0;k<c;k++){
             puf.readLine();
@@ -49,7 +55,6 @@ public class Killer extends Puzzle {
             String[] u=puf.readLine().trim().split(" ");
             for(int j=0;j<9;j++){
                 Sums[i][j]= Float.parseFloat(u[j]);
-                //System.out.println(Sums[i][j]);
             }
         }
 
@@ -58,34 +63,14 @@ public class Killer extends Puzzle {
         conversion();
     }
     public void conversion(){
-        //System.out.println("sssss");
         for(int i=0;i<9;i++){
             for(int j=0;j<9;j++){
                 SolvedPuzzle[i][j]=(int)Sums[i][j];
                 Colours[i][j]=(int)(((Sums[i][j]-SolvedPuzzle[i][j])+ 0.0001)*100);
-                /*String splitedString = String.valueOf(Sums[i][j]);
-                int splitedNumber = splitedString.indexOf('.');
-                SolvedPuzzle[i][j] = splitedNumber;
-                Colours[i][j] = splitedNumber;*/
             }
         }
     }
 
-
-    /*public void show(){
-        for(int i=0;i<9;i++){
-            for(int j=0;j<9;j++){
-               System.out.println(SolvedPuzzle[i][j]+" "+Colours[i][j] + "    " + Sums[i][j]);
-            }
-        }
-    }
-    public static void main(String Args[]) throws IOException {
-        Killer a;
-        a=new Killer();
-        a.files();
-        a.conversion();
-        a.show();
-    }*/
 
 
 }
