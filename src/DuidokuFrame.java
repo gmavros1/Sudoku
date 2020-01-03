@@ -9,15 +9,19 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
 
     Duidoku duidoku;
     private JLabel move = new JLabel();
-    private boolean wordoku;
 
-    DuidokuFrame(boolean w){
+    DuidokuFrame(boolean w, String u){
         super(4, 2);
         wordoku = w;
         frame.setTitle("Duidoku");
         duidoku = new Duidoku();
+        username = u;
         this.makeFrame();
+
+
     }
+
+
 
     private void makeFrame(){
         JLabel help = new JLabel("  For help hold 'H' ->  ");

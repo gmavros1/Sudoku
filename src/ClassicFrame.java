@@ -9,14 +9,14 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
     Classic classic;
     JButton check;
     private JLabel move = new JLabel();
-    private boolean wordoku;
 
-    ClassicFrame(boolean w) throws IOException {
+    ClassicFrame(boolean w, String u) throws IOException {
         super(9, 3);
         wordoku = w;
         frame.setTitle("Classic Sudoku");
         classic = new Classic();
         classic.files();
+        username = u;
         this.makeFrame();
 
     }

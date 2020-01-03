@@ -21,6 +21,8 @@ public class GeneralFrame implements ActionListener {
     protected JButton ng;
     protected JMenuBar mb;
     protected Container contentPaneMain;
+    protected boolean wordoku;
+    protected String username;
 
 
     GeneralFrame(int s, int sqr){
@@ -98,7 +100,7 @@ public class GeneralFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String choose = e.getActionCommand();
         if (choose.equals("New Game")) {
-            MenuFrame menu = new MenuFrame();
+            MenuFrame menu = new MenuFrame(wordoku, username);
             frame.dispose();
         }
     }

@@ -16,10 +16,13 @@ public class MenuFrame implements ActionListener {
     private JButton killer;
     private JButton duidoku;
     private boolean wordoku;
+    private String username;
 
     JDialog optionsD ;
     JLabel wrdku ;
-    JButton wurdokuButton ;
+    JButton wurdokuButton = new JButton();
+    JLabel setUsername = new JLabel();
+    JTextField writeUsername = new JTextField(15);
 
 
     public MenuFrame(){
@@ -33,8 +36,37 @@ public class MenuFrame implements ActionListener {
             duidoku.setBackground(Color.CYAN);
 
             wordoku = false;
+            wurdokuButton.setText("OFF");
 
-            this.makeFrame();
+        assert false;
+        setUsername.setText("Current username : " );
+
+        this.makeFrame();
+    }
+
+
+    public MenuFrame(boolean w, String u){
+        classic = new JButton("Classic Sudoku");
+        classic.setBackground(Color.pink);
+
+        killer = new JButton("Killer Sudoku");
+        killer.setBackground(Color.gray);
+
+        duidoku = new JButton("Duidoku");
+        duidoku.setBackground(Color.CYAN);
+
+        wordoku = w;
+        if (w)
+            wurdokuButton.setText("ON");
+        else
+            wurdokuButton.setText("OFF");
+
+        username = u;
+
+        assert false;
+        setUsername.setText("Current username : " + username);
+
+        this.makeFrame();
     }
 
     private void makeFrame(){
@@ -96,7 +128,6 @@ public class MenuFrame implements ActionListener {
     private void optionsDialog(){
         optionsD = new JDialog();
         wrdku = new JLabel();
-        wurdokuButton = new JButton("OFF");
 
         optionsD.setTitle("Options");
         optionsD.setSize(600, 200);
@@ -116,9 +147,6 @@ public class MenuFrame implements ActionListener {
         gc.gridy = 0;
         optionsD.add(wrdku, gc);
 
-        gc.weightx = 0.5;
-        gc.weighty = 0.5;
-
         //gc.fill = GridBagConstraints.BOTH;
         gc.gridx = 1;
         gc.gridy = 0;
@@ -126,7 +154,27 @@ public class MenuFrame implements ActionListener {
 
         wurdokuButton.addActionListener(this);
 
-        optionsD.setVisible(true);
+        gc.gridx = 0;
+        gc.gridy = 1;
+        optionsD.add(setUsername, gc);
+
+        writeUsername.setSize(100, 10);
+        gc.gridx = 1;
+        gc.gridy = 1;
+        optionsD.add(writeUsername, gc);
+
+
+        writeUsername.addActionListener(new ActionListener() {
+                                             @Override
+                                             public void actionPerformed(ActionEvent actionEvent) {
+                                                 username = writeUsername.getText();
+                                                 setUsername.setText("Current username : " + username);
+                                                 writeUsername.setText("");
+
+                                             }
+                                         });
+
+                optionsD.setVisible(true);
 
     }
 
@@ -136,7 +184,7 @@ public class MenuFrame implements ActionListener {
             case "Classic Sudoku":
 
                 try {
-                    ClassicFrame Classic = new ClassicFrame(wordoku);
+                    ClassicFrame Classic = new ClassicFrame(wordoku, username);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -144,25 +192,25 @@ public class MenuFrame implements ActionListener {
                 break;
             case "Killer Sudoku":
                 try {
-                    KillerFrame killer = new KillerFrame(wordoku);
+                    KillerFrame killer = new KillerFrame(wordoku, username);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
                 frame.dispose();
                 break;
             case "Duidoku":
-                DuidokuFrame duidoku = new DuidokuFrame(wordoku);
+                DuidokuFrame duidoku = new DuidokuFrame(wordoku, username);
                 frame.dispose();
                 break;
             case "Options":
                 this.optionsDialog();
                 break;
             case "Wordoku":
-                if (!wordoku){
+                if (wurdokuButton.getText().equals("OFF")){
                     wordoku = true;
                     wurdokuButton.setText("ON");
                 }
-                else{
+                else if (wurdokuButton.getText().equals("ON")){
                     wordoku = false;
                     wurdokuButton.setText("OFF");
                 }

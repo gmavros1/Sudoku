@@ -10,14 +10,14 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
     Killer killer;
     JButton check;
     private JLabel move = new JLabel();
-    private boolean wordoku;
 
-    KillerFrame(boolean w) throws IOException {
+    KillerFrame(boolean w, String u) throws IOException {
         super(9, 3);
         wordoku = w;
         frame.setTitle("Killer Sudoku");
         killer = new Killer();
         killer.files();
+        username = u;
         this.makeFrame();
     }
 
