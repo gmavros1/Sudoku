@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
 public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyListener {
 
@@ -76,6 +77,13 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
                 d.setLocationRelativeTo(null);
                 d.setVisible(true);
                 flag = true;
+
+                nickname winning = new nickname();
+                try {
+                    winning.newDataDui(1, 0);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             //για να αποφυγουμε την φαυλη επανάλυψη της μηχανής
@@ -98,6 +106,14 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
                     d.setSize(400, 50);
                     d.setLocationRelativeTo(null);
                     d.setVisible(true);
+
+                    nickname winning = new nickname();
+                    try {
+                        winning.newDataDui(0, 1);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                 }
             }
 
