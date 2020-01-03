@@ -122,7 +122,7 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
 
     @Override
     public void keyPressed(KeyEvent k) {
-        if(k.getKeyChar() == 'h' || k.getKeyChar() == 'H'){
+        if(k.getKeyChar() == 'h' || k.getKeyChar() == 'H'||k.getKeyChar()=='η'||k.getKeyChar()=='Η'){
             if(move.getText().equals("") && !classic.locked[a][b])   {
                 for (int i = 0; i< classic.checkValidMove(classic.getPuzzleToSolve(),9,a, b).size() ; i++){
                     //*****wordoku option*****//

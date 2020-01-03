@@ -2,8 +2,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Enumeration;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import static java.util.ResourceBundle.*;
 
 public class GeneralFrame implements ActionListener {
+    Locale greek;
+    ResourceBundle bundle;
     protected JFrame frame;
     protected JButton[][] board;
     protected int GAP;
@@ -22,8 +29,14 @@ public class GeneralFrame implements ActionListener {
         GAP = sqr;
         board = new JButton[side][side];
         this.makeFrame();
+        greek=new Locale("el","GR");
+
+
+
 
     }
+
+
 
     private void makeFrame(){
 

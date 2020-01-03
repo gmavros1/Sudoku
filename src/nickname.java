@@ -120,16 +120,13 @@ public class nickname {
                     String leaf;
                     while ((leaf = puf.readLine()) != null) {
                         if (leaf.equals(name)) {
-                            inpuf.append(leaf);
+                            inpuf.append(leaf);//όνομα
                             inpuf.append('\n');
                             leaf = puf.readLine();
-                            inpuf.append(leaf);
+                            inpuf.append(leaf).append(" ").append(i);//νέα δεδομένα για classic
                             inpuf.append('\n');
                             leaf = puf.readLine();
-                            inpuf.append(leaf+" "+i);
-                            inpuf.append('\n');
-                            leaf = puf.readLine();
-                            inpuf.append(leaf);
+                            inpuf.append(leaf);//δεδομένα killer
                             inpuf.append('\n');
                         }
                         else{
@@ -151,7 +148,7 @@ public class nickname {
 
             } else {
                 try {
-                    FileWriter ftw = new FileWriter("classic", true);
+                    FileWriter ftw = new FileWriter("nicknames", true);
                     ftw.write(name + "\n");
                     ftw.write(" \n");
                     ftw.write(i);
@@ -164,45 +161,55 @@ public class nickname {
             }
         }
  }
+ //Ιδια συνάρτηση με την παραπάνω,όμως αλλάζει η μια σειρά οπου ανανεώνουμε.
     public void newDataKiller(int i) throws IOException {
-        if(name!=null) {
+        if (name != null) {
             if (hasPlayed()) {
                 try {
                     BufferedReader puf = new BufferedReader(new FileReader("nicknames"));
                     StringBuffer inpuf = new StringBuffer();
-                    String lpuf;
-                    while ((lpuf = puf.readLine()) != null) {
-                        if (lpuf.equals(name)) {
-                            lpuf = puf.readLine();
-                            lpuf = puf.readLine();
-                            lpuf = puf.readLine();
-                            lpuf = lpuf + " " + String.valueOf(i);
-                            inpuf.append(lpuf);
+                    String leaf;
+                    while ((leaf = puf.readLine()) != null) {
+                        if (leaf.equals(name)) {
+                            inpuf.append(leaf);//όνομα
+                            inpuf.append('\n');
+                            leaf = puf.readLine();
+                            inpuf.append(leaf);//duidoku
+                            inpuf.append('\n');
+                            leaf = puf.readLine();
+                            inpuf.append(leaf);//classic
+                            inpuf.append('\n');
+                            leaf = puf.readLine();
+                            inpuf.append(leaf).append(" ").append(i);//killer
                             inpuf.append('\n');
                         }
                     }
-                    puf.close();
-                    FileOutputStream pufout = new FileOutputStream("nicknames");
-                    pufout.write(inpuf.toString().getBytes());
-                    pufout.close();
-                } catch (Exception e) {
-                    System.out.println("PROBLEM HERE");
-                }
-            } else {
-                try {
-                    FileWriter ftw = new FileWriter("classic", true);
-                    ftw.write(name + "\n");
-                    ftw.write('\n');
-                    ftw.write(" \n");
-                    ftw.write(i + "\n");
-                } catch (IOException ioe) {
-                    System.err.println("IOException" + ioe.getMessage());
+                }catch(Exception e){
+                        System.out.println("PROBLEM HERE");
+                    }
+                } else{
+                    try {
+                        FileWriter ftw = new FileWriter("classic", true);
+                        ftw.write(name + "\n");
+                        ftw.write('\n');
+                        ftw.write(" \n");
+                        ftw.write(i + "\n");
+                    } catch (IOException ioe) {
+                        System.err.println("IOException" + ioe.getMessage());
+
+                    }
 
                 }
-
             }
         }
-    }
+
+
+    /**
+     * Δέχετε (1,0) για νίκη του παίκτη ή (0,1) για ήττα.
+     * @param win 1 αν ο παίκτης νίκησε 0 αν εχασε
+     * @param lose 1 αν νικησε ,0 αν έχασε
+     * @throws IOException
+     */
     public void newDataDui(int win,int lose) throws IOException {
         if (name != null) {
             if (hasPlayed()) {
@@ -210,14 +217,19 @@ public class nickname {
                     int[] score = new int[2];
                     BufferedReader puf = new BufferedReader(new FileReader("nicknames"));
                     StringBuffer inpuf = new StringBuffer();
-                    String lpuf;
-                    while ((lpuf = puf.readLine()) != null) {
-                        if (lpuf.equals(name)) {
+                    String leaf;
+                    while ((leaf = puf.readLine()) != null) {
+                        if (leaf.equals(name)) {
                             String[] u = puf.readLine().trim().split(" ");
                             score[0] = Integer.parseInt(u[0]) + win;
                             score[1] = Integer.parseInt(u[1]) + lose;
-                            lpuf = score[0] + " " + score[1];
-                            inpuf.append(lpuf);
+                            inpuf.append(score[0]).append(" ").append(score[1]);//Δεδομένα duidoku
+                            inpuf.append('\n');
+                            leaf = puf.readLine();
+                            inpuf.append(leaf);//δεδομένα classic
+                            inpuf.append('\n');
+                            leaf = puf.readLine();
+                            inpuf.append(leaf);//δεδομένα killer
                             inpuf.append('\n');
                         }
                     }
