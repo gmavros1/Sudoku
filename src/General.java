@@ -14,8 +14,6 @@ public class General {
     public ArrayList<Integer> checkValidMove(int[][] matrix, int len, int a, int b){
         ArrayList<Integer> moves;
         moves = new ArrayList<>();
-
-
         for(int i = 1; i<=len; i++){
             if (CheckSthlh(matrix, len, b, i))
                 continue;

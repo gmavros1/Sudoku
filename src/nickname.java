@@ -33,7 +33,7 @@ public class nickname<Arraylist> {
      * @return ψευδές αν δεν βρέθηκε το όνομα,άρα δεν έχει ξαναπαίξει και αληθές αν έχει.
      * @throws IOException
      */
-    public boolean hasPlayed() throws IOException {
+    private boolean hasPlayed() throws IOException {
         if (name != null) {//περίπτωση που παίζει ανώνυμα
             BufferedReader puf = new BufferedReader( new FileReader( "nicknames" ) );
             String sto;
@@ -68,7 +68,9 @@ public class nickname<Arraylist> {
                 String sto;
                 while ((sto = puf.readLine()) != null) {
                     if (sto.equals( name )) {
+                        System.out.println( sto);
                         sto = puf.readLine();//σειρά για duidoku
+                        System.out.println( sto );
                         String[] u = puf.readLine().trim().split( " " );
                         for (int j = 0; j < u.length; j++) {
                             if ((Integer.parseInt( u[j] )) == i) {
@@ -119,6 +121,7 @@ public class nickname<Arraylist> {
      * @throws IOException
      */
     public void newDataClassic(int i) throws IOException {
+        System.out.println( "onooooo" );
         if (name != null) {
             if (hasPlayed()) {
                 try {
@@ -127,7 +130,11 @@ public class nickname<Arraylist> {
                     String leaf;
                     while ((leaf = puf.readLine()) != null) {
                         if (leaf.equals( name )) {
+                            System.out.println( name );
                             inpuf.append( leaf );//όνομα
+                            inpuf.append( '\n' );
+                            leaf = puf.readLine();
+                            inpuf.append( leaf );//dui
                             inpuf.append( '\n' );
                             leaf = puf.readLine();
                             inpuf.append( leaf ).append( " " ).append( i );//νέα δεδομένα για classic
@@ -136,14 +143,24 @@ public class nickname<Arraylist> {
                             inpuf.append( leaf );//δεδομένα killer
                             inpuf.append( '\n' );
                         } else {
-                            inpuf.append( leaf );
+                            inpuf.append( leaf );//όνομα
                             inpuf.append( '\n' );
+                            leaf = puf.readLine();
+                            inpuf.append( leaf );//dui
+                            inpuf.append( '\n' );
+                            leaf = puf.readLine();
+                            inpuf.append( leaf );//classic
+                            inpuf.append( '\n' );
+                            leaf = puf.readLine();
+                            inpuf.append( leaf );//killer
+                            inpuf.append( '\n' );
+
                         }
                     }
 
                     puf.close();
                     String po = inpuf.toString();
-
+                    System.out.println( po+ "ooooo" );
                     FileOutputStream popout = new FileOutputStream( "nicknames" );
                     popout.write( po.getBytes() );
                     popout.close();
@@ -178,6 +195,7 @@ public class nickname<Arraylist> {
                     String leaf;
                     while ((leaf = puf.readLine()) != null) {
                         if (leaf.equals( name )) {
+
                             inpuf.append( leaf );//όνομα
                             inpuf.append( '\n' );
                             leaf = puf.readLine();
@@ -303,7 +321,12 @@ public class nickname<Arraylist> {
         return nam;
 
     }
-
+public static void main(String Args[]) throws IOException {
+        nickname nik=new nickname("Loukritia");
+        boolean flag;
+        nik.playedClassic(1);
+        nik.newDataClassic( 27);
+}
 
 
 
