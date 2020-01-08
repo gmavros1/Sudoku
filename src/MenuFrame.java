@@ -18,15 +18,22 @@ public class MenuFrame implements ActionListener {
     private boolean wordoku;
     private String username;
 
-    JDialog optionsD ;
-    JLabel wrdku ;
-    JButton wurdokuButton = new JButton();
-    JLabel setUsername = new JLabel();
-    JTextField writeUsername = new JTextField(15);
+    JDialog optionsD ; // παράθυρο που θα ανοιγει για να εισαχθεί επιλογή wordoku όνομα χρήστη και γλώσσα
+    JLabel wrdku ; // ετικέτα για επιλογή wordoku
+    JButton wurdokuButton = new JButton(); // το on-off του wordoku
+    JLabel setUsername = new JLabel(); // σήμναση για εισαγωγή ονόματος χρήση στο διπλανό textfield
+    JTextField writeUsername = new JTextField(15); // textfield για εισαγωγή ονόματος χρήστη
 
-    private JButton scores;
+    private JButton scores; // κουμπί για την προβολή στατιστικών
 
-
+    /**
+     * Δημιουργεία βασικών στοιχείων του menu όταν ένα αντικείμενο της κλάσης καλείται για πρώτη φορά (χωρίς ορίσματα):
+     * Δημιουργεία κουμπιών για τα τρία διαφορετικά είδη
+     * Αρχικοποίηση κατάστασης wordoku ως ανενεργή
+     * Αρχικοποίηση jLabel το οποίο προτρέπει στον χρήστη να εισάγει όνομα
+     * Δημιουργεια κουμπιου στατιστικών
+     * κλήση συνάρτησης για την δημιουργεια του frame και την εισαγωγή στοιχείων σε αυτό
+     */
     public MenuFrame(){
             classic = new JButton("Classic Sudoku");
             classic.setBackground(Color.pink);
@@ -49,6 +56,15 @@ public class MenuFrame implements ActionListener {
     }
 
 
+    /**
+     * εκτελεί της ίδες διαδικασίες με την MenuFrame() αλλά με τις παρακάτω διαφορές :
+     * Ελέγχει αν ο χρήστης έχει επιλέξει την χρήση wordoku και θέτει την κατάλληλη τιμή στην boolean μεταβλητη
+     * αλλα και στο label που σχετίζεται με αυτήν σύμφωνα με την τιμή του ορίσματος w
+     * Παίρνει το username ως όρισμα και θέτει καταλλήλος το περιεχόμενο του setUsername
+     * επίσης
+     * @param w επιλογη wordoku
+     * @param u username χρήστη
+     */
     public MenuFrame(boolean w, String u){
         classic = new JButton("Classic Sudoku");
         classic.setBackground(Color.pink);
@@ -75,6 +91,11 @@ public class MenuFrame implements ActionListener {
         this.makeFrame();
     }
 
+    /**
+     * Δημιουργεία βασικής μπάρας που περιέχει την επιλογή options και scores
+     * Toποθέτηση κουμπιών για επιλογή pazl σε gridbag
+     * προσθήκη actionlistener για τα κουμπια και διαμόρφωση παραθύρου
+     */
     private void makeFrame(){
         frame = new JFrame("Sudoku");
         frame.setLayout(new BorderLayout());
@@ -132,6 +153,10 @@ public class MenuFrame implements ActionListener {
 
     }
 
+    /**
+     * Δημιουργεία παραθύρου για ρυθμίσεις
+     * προσθήκη στοιχειων σε διάταξη gridBag
+     */
     private void optionsDialog(){
         optionsD = new JDialog();
         wrdku = new JLabel();
@@ -159,7 +184,7 @@ public class MenuFrame implements ActionListener {
         gc.gridy = 0;
         optionsD.add(wurdokuButton, gc);
 
-        wurdokuButton.addActionListener(this);
+        wurdokuButton.addActionListener(this); // προσθήκη listener για το κουμπι του wordoku
 
         gc.gridx = 0;
         gc.gridy = 1;
@@ -171,6 +196,10 @@ public class MenuFrame implements ActionListener {
         optionsD.add(writeUsername, gc);
 
 
+        /**
+         * Σε κάθε εισαγωγή ονόματος θα ανανεώνεται το label του username κατάλληλα
+         * και θα εισάγεται το όνομα του χρήστη στην μεταβλητη String username
+         */
         writeUsername.addActionListener(new ActionListener() {
                                              @Override
                                              public void actionPerformed(ActionEvent actionEvent) {
@@ -185,6 +214,12 @@ public class MenuFrame implements ActionListener {
 
     }
 
+    /**
+     *Με κάθε επιλογή τύπου παιχνιδιού διμιουργείται κατάλληλο αντικειμενο με ορίσματα wordoku kai username
+     * καταστρέφεται το τρέχον frame
+     * Mε την επιλογή Woedoku  ελέγχεται η τρεχουσα κατάσταση του label και αλλάζει κατάλληλα το ίδιο
+     * αλλα και η αντιστοιχη boolean μεταβλητή
+     */
     public void actionPerformed(ActionEvent e){
         String points = e.getActionCommand();
         switch (points) {

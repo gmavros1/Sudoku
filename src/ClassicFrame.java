@@ -4,12 +4,22 @@ import java.awt.event.*;
 import java.awt.Color;
 import java.io.IOException;
 
+/**
+ * Υλοποιείται το frame του κλασικού sudoku
+ */
 public class ClassicFrame extends GeneralFrame implements ActionListener, KeyListener {
 
-    Classic classic;
-    JButton check;
-    private JLabel move = new JLabel();
+    Classic classic; // αντικείμενο της λογικής του classic
+    JButton check;  // κουμπί που χρησημοποιείται για τον έλεγχο των ορθών εισαγωγών στα κελιά
+    private JLabel move = new JLabel(); // στο label αυτο θα αναγράφονται οι διαθέσιμες κινήσεις
 
+    /**
+     * Καλείται αρχικα με την super ο constractor της γενικής κλασης general περνώντας ως όρισμα τον αριθμο
+     * των κελιών της μιας πλευράς του πίνακα του sudoku και την ρίζα αυτου
+     * αποθηκεύται η επιλογή wordoku στην μεταβλήτη wordoku και το username του χρήστη στην μεταβλητή username
+     * @param w επιλογη wordoku
+     * @param u username χρήστη
+     */
     ClassicFrame(boolean w, String u) throws IOException {
         super(9, 3);
         wordoku = w;
@@ -21,6 +31,11 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
 
     }
 
+    /**
+     *Εισαγωγή στην βασικη μπάρα του κουμπιού check και την επιλογη της βοήθειας (label).
+     * Σε καθε στοιχείο του board στο text εισάγωνται οι αριιθμοι του πίνακα PuzzleToSolve ή σε περίπτωση wordoku τα γράμματα
+     * προστήθονται actionlisteners για κάθε κουμπί και ως action command η συντεταγμένη του ως στρινγκ.
+     */
     private void makeFrame(){
 
         check = new JButton("Check");
@@ -51,9 +66,17 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
     }
 
 
+    /**
+     *σε περιπτωση check ελεχγεται η κατάσταση του παιχνιδιού από την EndOfGame()
+     * αλλάζοντας κατάλληλα το χρώμα στα σωστα και λαθος κουτακια. Επειτα βγαζει και το καταλληλο μηνυμα
+     *Έπειτα προσθέτουμε keylistener για τα στοιχεια του board επιλέγοντας το στοιχείο μς την βοήθεια του a b
+     * a = το πρωτο ψηφιο του string choose
+     * b = το δευτερο ψηφιο του string choose
+     * ειναι ακεραιοι
+     */
     public void actionPerformed(ActionEvent e){
         super.actionPerformed(e);
-        String choose = e.getActionCommand();
+        String choose = e.getActionCommand(); // το action command που θα διαχειρηστουμε
 
         if (choose.equals("Check")){
             if (classic.EndOfGame()){
@@ -92,6 +115,10 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
         board[a][b].addKeyListener(this);
     }
 
+    /**
+     * Ανάλογα την περιπτωση wordoku ή οχι.
+     *
+     */
     @Override
     public void keyTyped(KeyEvent k) {
         //*****wordoku option*****//
