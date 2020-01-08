@@ -257,6 +257,8 @@ public class nickname {
         }
     }
 
-
+/*public int[] giveScore(String name){
+return
+}*/
 
 }

@@ -31,10 +31,6 @@ public class GeneralFrame implements ActionListener {
         GAP = sqr;
         board = new JButton[side][side];
         this.makeFrame();
-        greek=new Locale("el","GR");
-
-
-
 
     }
 
@@ -50,7 +46,7 @@ public class GeneralFrame implements ActionListener {
         contentPaneMain.setSize(700, 700);
 
         mb = new JMenuBar();
-        ng = new JButton("New Game");
+        ng = new JButton("New game");
         mb.add(ng);
 
 
