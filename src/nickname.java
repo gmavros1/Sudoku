@@ -298,7 +298,7 @@ public class nickname<Arraylist> {
             }
         puf.close();
         } catch(Exception e){
-            System.out.println( "PROBLEM HERE" );
+            System.out.println( "PROBLEeM HERE" );
         }
         return nam;
 
