@@ -24,6 +24,8 @@ public class MenuFrame implements ActionListener {
     JLabel setUsername = new JLabel();
     JTextField writeUsername = new JTextField(15);
 
+    private JButton scores;
+
 
     public MenuFrame(){
             classic = new JButton("Classic Sudoku");
@@ -40,6 +42,8 @@ public class MenuFrame implements ActionListener {
 
         assert false;
         setUsername.setText("Current username : " );
+
+        scores = new JButton("Scores");
 
         this.makeFrame();
     }
@@ -66,6 +70,8 @@ public class MenuFrame implements ActionListener {
         assert false;
         setUsername.setText("Current username : " + username);
 
+        scores = new JButton("Scores");
+
         this.makeFrame();
     }
 
@@ -79,6 +85,7 @@ public class MenuFrame implements ActionListener {
 
         JMenuBar mb = new JMenuBar();
         mb.add(options);
+        mb.add(scores);
 
         JPanel buttons = new JPanel();
         buttons.setLayout(new GridBagLayout());
