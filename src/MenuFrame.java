@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Αρχική κλάση γραφικών όπου θα επιλέγεται ένα απο
@@ -25,7 +26,6 @@ public class MenuFrame implements ActionListener {
     JTextField writeUsername = new JTextField(15); // textfield για εισαγωγή ονόματος χρήστη
 
     private JButton scores; // κουμπί για την προβολή στατιστικών
-    private JDialog scoresD;
 
     /**
      * Δημιουργεία βασικών στοιχείων του menu όταν ένα αντικείμενο της κλάσης καλείται για πρώτη φορά (χωρίς ορίσματα):
@@ -223,7 +223,8 @@ public class MenuFrame implements ActionListener {
      * προσθήκη στοιχειων σε διάταξη gridBag
      */
     public void scoresDialog(){
-        scoresD = new JDialog();
+        nickname name = new nickname();
+        JDialog scoresD = new JDialog();
 
         scoresD.setTitle("Scores");
         scoresD.setSize(600, 600);
@@ -259,39 +260,39 @@ public class MenuFrame implements ActionListener {
         /*
             εισαγωγή loop του array των ονομάτων στο οπίο σε καθε σειρα στην
             διαταξη gridbag θα μπαινει ονομα νικες ητες
+        */
+        int count = 1;
 
-            int count = 1;
+        for (String usernames : name.playersNames()){
 
-            for (String usernames : FUNCTIONSARRAYLIST){
+            JLabel usernm = new JLabel();
+            usernm.setText(usernames);
 
-                JLabel usernm = new JLabel();
-                usernm.setText("usernames");
+            JLabel winings = new JLabel();
+            winings.setText(String.valueOf(name.giveScore(usernames)[0]));
 
-                JLabel wins = new JLabel();
-                wins.setText(FUNCTIONWINS(usernames));
-
-                JLabel looses = new JLabel();
-                looses.setText(FUNCTIONLOOSES(usernames));
-
-
-                gc.gridx = 0;
-                gc.gridy = count;
-                optionsD.add(usernm, gc);
-
-                gc.gridx = 1;
-                gc.gridy = count;
-                optionsD.add(wins, gc);
-
-                gc.gridx = 2;
-                gc.gridy = count;
-                optionsD.add(looses, gc);
-
-                count+=1;
-
-            }
+            JLabel loosess = new JLabel();
+            loosess.setText(String.valueOf(name.giveScore(usernames)[1]));
 
 
-         */
+            gc.gridx = 0;
+            gc.gridy = count;
+            optionsD.add(usernm, gc);
+
+            gc.gridx = 1;
+            gc.gridy = count;
+            optionsD.add(wins, gc);
+
+            gc.gridx = 2;
+            gc.gridy = count;
+            optionsD.add(looses, gc);
+
+            count+=1;
+
+        }
+
+
+
 
 
 
