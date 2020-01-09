@@ -182,6 +182,7 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
      */
     @Override
     public void keyReleased(KeyEvent k) {
+
         move.setText("");
     }
 

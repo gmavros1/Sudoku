@@ -6,11 +6,21 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 
+/**
+ * Υλοποιείται το frame του duidoku
+ */
 public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyListener {
 
     Duidoku duidoku;
     private JLabel move = new JLabel();
 
+    /**
+     * Καλείται αρχικα με την super ο constractor της γενικής κλασης general περνώντας ως όρισμα τον αριθμο
+     * των κελιών της μιας πλευράς του πίνακα του sudoku και την ρίζα αυτου
+     * αποθηκεύται η επιλογή wordoku στην μεταβλήτη wordoku και το username του χρήστη στην μεταβλητή username
+     * @param w επιλογη wordoku
+     * @param u username χρήστη
+     */
     DuidokuFrame(boolean w, String u){
         super(4, 2);
         wordoku = w;
@@ -22,8 +32,10 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
 
     }
 
-
-
+    /**
+     *Εισαγωγή στην βασικη μπάρα της επιλογη της βοήθειας (label).
+     * προστήθονται actionlisteners για κάθε κουμπί και ως action command η συντεταγμένη του ως στρινγκ.
+     */
     private void makeFrame(){
         JLabel help = new JLabel("  For help hold 'H' ->  ");
         mb.add(help);
@@ -37,6 +49,12 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
 
     }
 
+    /**
+     *προσθέτουμε keylistener για τα στοιχεια του board επιλέγοντας το στοιχείο μe την βοήθεια του a b
+     * a = το πρωτο ψηφιο του string choose
+     * b = το δευτερο ψηφιο του string choose
+     * ειναι ακεραιοι
+     */
     public void actionPerformed(ActionEvent e){
         super.actionPerformed(e);
         String choose = e.getActionCommand();
@@ -48,6 +66,27 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
     }
 
 
+    /**
+     * Στο στοιχείο element αποθηκεύεται σε μορφή ακεραίου η επιλογή του παίχτη
+     * και ελέγχεται η εκγυρότητα της κίνησης προκειμένου να συνεχιστεί η διαδικασία.
+     * Στην συνέχεια δηλώνεται μια boolean μεταβλητή η οποία αρχικοποιήται σε λανθασμένη
+     * και δείχνει αν έχει παιχτεί η τελευταία κίνηση του παιχνιδιού.
+     *
+     * Αμέσως μετά εκτελείται η κίνηση του χρήστη με κατάλληλο τρόπο αν ειναι wordoku ή normal
+     * και καλείται η συνάρτηση lockelements για να αχρηστευτουν τα πεδια στα οποία δεν εισάγεται καμια κίνηση
+     *
+     * Μετά την κίνση του παίχτη, γινεται έλεχος με την συνάρτηση boolean NoAvailableMoves(), και
+     * αν είναι αληθής. δεν υπαρχει διαθέσιμη κίνηση για το μηχάνημα αρα νικάει ο Χρηστης και εμφανίζεται το κα-
+     * τάλληλο μήνυμα. Επίσης καλείται και η κατάλληλη συνάρτηση για την αλλαγή του σκορ του τρέχοντος χρήστη.
+     * Τότε και η μεταβλητή flag γίνεται true
+     *
+     * To παιχνιδι συνεχίζεται απο το μηχάνημα εαν flag == flase
+     *
+     * Μέσω της συνάρτησης επιστρέφεται η θέση της κίνησης του υπολογιστη ως string, αφου εκτελεστεί, και έπειτα
+     * αποθηκεύουμε τις συντεταγμενες στα a και b ως ακεραιους. Με την βοηθεια των a και b γραφουμε στην θέση
+     * του board[a][b] το στοιχείο του DuiBoard[a][b].
+     * Έπειτα γίνετια η ίδια διαδικασία για τον έλεγχο της νίκης.
+     */
     @Override
     public void keyTyped(KeyEvent k) {
         int element = k.getKeyChar() - '0';
@@ -123,6 +162,9 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
 
     /**
      * Λοκάρει τα κουτάκια στα οποία δεν μπορείς να κάνεις καμία έγκυρη κίνηση
+     * O έλεγχος γίνεται μέσω της συνάρτησης checkValidMove
+     * με τα παρακάτω εμφολευμενα for loops που τσεκάρουν τους αριθμους απο 1- side
+     * αν μπορουνα να εισαχθούν σε όλλες τις πιθανές θέσεις
      */
     private void lockeElements(){
         for (int i=0; i<side; i++)
@@ -140,6 +182,11 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
             }
     }
 
+    /**
+     *Στην περίπτωση που ο χρήστης πατάει παρατεταμένα το κουμπι Η
+     * εάν το label move είναι άδειο, μέσω της συνάρτησης checkvalid move επιστρέφονται οι διαθέσιμες
+     * κινήσεις και αναγράφονται σε αυτό
+     **/
     @Override
     public void keyPressed(KeyEvent k) {
         if(k.getKeyChar() == 'h' || k.getKeyChar() == 'H'){
@@ -156,6 +203,10 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
 
         }
     }
+
+    /**
+     *Όταν απελευθερώνεται το κουμπί Η το label move γίνεται παλι κενό.
+     */
     @Override
     public void keyReleased(KeyEvent k) {
         move.setText("");
