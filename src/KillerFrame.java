@@ -5,12 +5,22 @@ import java.awt.Color;
 import java.io.IOException;
 import java.util.Random;
 
+/**
+ * Υλοποιείται το frame του killer sudoku
+ */
 public class KillerFrame extends GeneralFrame implements ActionListener, KeyListener {
 
     Killer killer;
     JButton check;
     private JLabel move = new JLabel();
 
+    /**
+     * Καλείται αρχικα με την super ο constractor της γενικής κλασης general περνώντας ως όρισμα τον αριθμο
+     * των κελιών της μιας πλευράς του πίνακα του sudoku και την ρίζα αυτου
+     * αποθηκεύται η επιλογή wordoku στην μεταβλήτη wordoku και το username του χρήστη στην μεταβλητή username
+     * @param w επιλογη wordoku
+     * @param u username χρήστη
+     */
     KillerFrame(boolean w, String u) throws IOException {
         super(9, 3);
         wordoku = w;
@@ -21,6 +31,11 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
         this.makeFrame();
     }
 
+    /**
+     *Εισαγωγή στην βασικη μπάρα του κουμπιού check και την επιλογη της βοήθειας (label).
+     * προστήθονται actionlisteners για κάθε κουμπί και ως action command η συντεταγμένη του ως στρινγκ.
+     * Καλείται η συνάρτηση colornums.
+     */
     private void makeFrame(){
         check = new JButton("Check");
         mb.add(check);
@@ -28,11 +43,6 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
         mb.add(help);
         mb.add(move);
 
-        /*for (int i=0; i<side; i++)
-            for (int j=0; j<side; j++){
-                if (killer.getPuzzleToSolve()[i][j]!=0)
-                    board[i][j].setText(Integer.toString(killer.getPuzzleToSolve()[i][j]));
-            }*/
 
         for (int i=0; i<side; i++)
             for (int j=0; j<side; j++){
@@ -46,17 +56,31 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
 
     }
 
+    /**
+     * Η συναρτηση αυτή υπολογίζει και αναγράφει τα αθροίσματα των περιοχών του κιλλερ
+     * αντιστοιχησμένα με ένα χρώμα.
+     */
     private void colorsNsums(){
 
-        boolean[][] haveBennEncountered = new boolean[9][9];
+        boolean[][] haveBennEncountered = new boolean[9][9]; // τα κελία των οποίων οι αριθμοί έχουν καταμετρηθεί σε κάποιο αθροισμα
 
         for (int i=0; i<side; i++)
             for (int j=0; j<side; j++)
                 haveBennEncountered[i][j] =false;
 
+        /*
+        O πίνακας Color τοu killer περιέχει τον ίδιο αριθμο στα κελιά των στοιχείων που ανοίκουν
+        στο ίδιο άθροισμα. Έτσι στη μεταβλητη match αποθηκεύουμε τον αριθμό color του στοιχειου που εξετάζουμε
+        εάν δεν έχει καταμετρηθεί, και έπειτα συγκρίνουμε τους υπόλοιπους αριθμούς color των στοιχείων
+        για να προσδιορίσουμε τις αθροιστηκες περιοχές και να υπολογίσουμε τα αθροισματα.
+        **/
         int match;
         int sum;
 
+        /*
+        Στην colorSums θα αναγράφονται αριθμοί-αθροίσματα χρωματισμένα με το χρώμα της περιοχής του
+        πίνακα του σουντόκου, στην οποία ανήκουν.
+         */
         JMenuBar colorSums = new JMenuBar();
         contentPaneMain.add(colorSums, BorderLayout.PAGE_END);
         JLabel colors = new JLabel("Colors 'n Sums : ");
@@ -65,6 +89,11 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
         colorSums.setBackground(Color.black);
 
 
+        /*
+        Σε κάθε επανάλυψη αυτού του loop δημιουργείται ενα τυχαίο "ανοιχτό χρώμα" με το οποίο
+        χρωματίζεται το backround των κουμπιών που βρίσκονται στην ίδια αθροιστική περιοχή.
+        Υπολογιζονται τα αθροίσματα  και αναγράφονται στην κάτω μπαρα .
+         */
         for (int i=0; i<side; i++)
             for (int j=0; j<side; j++){
 
@@ -74,7 +103,7 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
                     match = killer.getColours()[i][j];
 
                     Random rand1 = new Random();
-                    int ena = rand1.nextInt(151)+100;
+                    int ena = rand1.nextInt(151)+100; // από 100 μέχρι 250
 
                     Random rand2 = new Random();
                     int einai = rand2.nextInt(151)+100;
@@ -114,7 +143,14 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
 
     }
 
-
+    /**
+     *σε περιπτωση check ελεχγεται η κατάσταση του παιχνιδιού από την EndOfGame()
+     * αλλάζοντας κατάλληλα το χρώμα στα σωστα και λαθος κουτακια. Επειτα βγαζει και το καταλληλο μηνυμα
+     *Έπειτα προσθέτουμε keylistener για τα στοιχεια του board επιλέγοντας το στοιχείο μς την βοήθεια του a b
+     * a = το πρωτο ψηφιο του string choose
+     * b = το δευτερο ψηφιο του string choose
+     * ειναι ακεραιοι
+     */
     public void actionPerformed(ActionEvent e){
         super.actionPerformed(e);
         String choose = e.getActionCommand();
@@ -156,7 +192,18 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
         board[a][b].addKeyListener(this);
     }
 
-
+    /**
+     * Ανάλογα την περιπτωση wordoku ή οχι.
+     *  wordoku:
+     *      Ελέγχει εάν ο χαρακτήρας που πατήθηκε εμπεριέχεται στην συμβολοσειρά ΑBCDEFGHI.
+     *      Εάν ναι ελέγχει την εγκυρότητα της κίνησης μεσω συνάρτησης checkValidMove.
+     *      Σε περίπτωση έγκυρης κίνησης εκτελείται η κίνηση από την λογική μέσω της συνάρτησης move
+     *      και τέλος το τεxt του κουμπιου που επιλέχτηκε παίρνει τον αριθμό επιλογής του παίχτη.
+     *  non-wordoku:
+     *      μετατρέπεται ο χαρακτήρας σε αριθμός
+     *      Εάν βρισκεται αναμεσα στο 1 και στο 9 :
+     *      εκτέλειται η ίδια διαδικασία σε αντιστοιχη περιπτωση με το wordoku
+     */
     @Override
     public void keyTyped(KeyEvent k) {
         //*****wordoku option*****//
@@ -184,6 +231,11 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
 
     }
 
+    /**
+     *Στην περίπτωση που ο χρήστης πατάει παρατεταμένα το κουμπι Η
+     * εάν το label move είναι άδειο, μέσω της συνάρτησης checkvalid move επιστρέφονται οι διαθέσιμες
+     * κινήσεις και αναγράφονται σε αυτό
+     **/
     @Override
     public void keyPressed(KeyEvent k) {
         if(k.getKeyChar() == 'h' ){
@@ -200,6 +252,10 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
 
         }
     }
+
+    /**
+     *Όταν απελευθερώνεται το κουμπί Η το label move γίνεται παλι κενό.
+     */
     @Override
     public void keyReleased(KeyEvent k) {
         move.setText("");

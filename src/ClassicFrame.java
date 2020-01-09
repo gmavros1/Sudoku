@@ -117,7 +117,15 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
 
     /**
      * Ανάλογα την περιπτωση wordoku ή οχι.
-     *
+     *  wordoku:
+     *      Ελέγχει εάν ο χαρακτήρας που πατήθηκε εμπεριέχεται στην συμβολοσειρά ΑBCDEFGHI.
+     *      Εάν ναι ελέγχει την εγκυρότητα της κίνησης μεσω συνάρτησης checkValidMove.
+     *      Σε περίπτωση έγκυρης κίνησης εκτελείται η κίνηση από την λογική μέσω της συνάρτησης move
+     *      και τέλος το τεxt του κουμπιου που επιλέχτηκε παίρνει τον αριθμό επιλογής του παίχτη.
+     *  non-wordoku:
+     *      μετατρέπεται ο χαρακτήρας σε αριθμός
+     *      Εάν βρισκεται αναμεσα στο 1 και στο 9 :
+     *      εκτέλειται η ίδια διαδικασία σε αντιστοιχη περιπτωση με το wordoku
      */
     @Override
     public void keyTyped(KeyEvent k) {
@@ -147,6 +155,11 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
 
     }
 
+    /**
+     *Στην περίπτωση που ο χρήστης πατάει παρατεταμένα το κουμπι Η
+     * εάν το label move είναι άδειο, μέσω της συνάρτησης checkvalid move επιστρέφονται οι διαθέσιμες
+     * κινήσεις και αναγράφονται σε αυτό
+     **/
     @Override
     public void keyPressed(KeyEvent k) {
         if(k.getKeyChar() == 'h' || k.getKeyChar() == 'H'||k.getKeyChar()=='η'||k.getKeyChar()=='Η'){
@@ -163,6 +176,10 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
 
         }
     }
+
+    /**
+     *Όταν απελευθερώνεται το κουμπί Η το label move γίνεται παλι κενό.
+     */
     @Override
     public void keyReleased(KeyEvent k) {
         move.setText("");
