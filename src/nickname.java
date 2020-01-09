@@ -378,7 +378,7 @@ public class nickname {
         try {
             BufferedReader puf = new BufferedReader( new FileReader( "nicknames" ) );
             String leaf;
-            while ((leaf = puf.readLine()) != null) {
+            while ((leaf = puf.readLine())  != null) {
                 nam.add(leaf);
                 puf.readLine();
                 puf.readLine();
