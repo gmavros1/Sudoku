@@ -203,8 +203,7 @@ public class nickname<Arraylist> {
                     StringBuffer inpuf = new StringBuffer();
                     String leaf;
                     while ((leaf = puf.readLine()) != null) {
-                        if (leaf.equals( name )) {
-                            inpuf.append( '\n' );
+                        if (leaf.equals(name)) {
                             System.out.println( name );
                             inpuf.append( leaf );//όνομα
                             System.out.println( leaf );
@@ -219,14 +218,37 @@ public class nickname<Arraylist> {
                             inpuf.append( '\n' );
                             leaf = puf.readLine();
                             if(!(leaf.equals(""))) {
-                                inpuf.append( leaf ).append( " " ).append( i );//killer
+                                inpuf.append(leaf).append( " " ).append( i );//killer
+                                System.out.println( "heeeeeeew"+i );
                             }else {
                                 inpuf.append( i );
+                                System.out.println( "hw"+i );
                             }
-
+                            inpuf.append( '\n' );
+                        }else{
+                            System.out.println( name );
+                            inpuf.append( leaf );//όνομα
+                            System.out.println( leaf );
+                            inpuf.append( '\n' );
+                            leaf = puf.readLine();
+                            inpuf.append( leaf );//duidoku
+                            System.out.println( leaf );
+                            inpuf.append( '\n' );
+                            leaf = puf.readLine();
+                            inpuf.append( leaf );//classic
+                            System.out.println( leaf );
+                            inpuf.append( '\n' );
+                            leaf = puf.readLine();
+                            inpuf.append( leaf );//killer
                             inpuf.append( '\n' );
                         }
                     }
+                    puf.close();
+                    String po = inpuf.toString();
+                    System.out.println( po+ "oooooo" );
+                    FileOutputStream popout = new FileOutputStream( "nicknames" );
+                    popout.write( po.getBytes() );
+                    popout.close();
                 } catch (Exception e) {
                     System.out.println( "PROBLEM HERE" );
                 }
@@ -269,6 +291,8 @@ public class nickname<Arraylist> {
                     String leaf;
                     while ((leaf = puf.readLine()) != null) {
                         if (leaf.equals( name )) {
+                            inpuf.append( name );
+                            inpuf.append( '\n' );
                             String[] u = puf.readLine().trim().split( " " );
                             score[0] = Integer.parseInt( u[0] ) + win;
                             score[1] = Integer.parseInt( u[1] ) + lose;
@@ -279,6 +303,23 @@ public class nickname<Arraylist> {
                             inpuf.append( '\n' );
                             leaf = puf.readLine();
                             inpuf.append( leaf );//δεδομένα killer
+                            inpuf.append( '\n' );
+                        }
+                        else{
+                            System.out.println( name );
+                            inpuf.append( leaf );//όνομα
+                            System.out.println( leaf );
+                            inpuf.append( '\n' );
+                            leaf = puf.readLine();
+                            inpuf.append( leaf );//duidoku
+                            System.out.println( leaf );
+                            inpuf.append( '\n' );
+                            leaf = puf.readLine();
+                            inpuf.append( leaf );//classic
+                            System.out.println( leaf );
+                            inpuf.append( '\n' );
+                            leaf = puf.readLine();
+                            inpuf.append( leaf );//killer
                             inpuf.append( '\n' );
                         }
                     }
@@ -292,11 +333,13 @@ public class nickname<Arraylist> {
             } else {
                 try {
                     FileWriter ftw = new FileWriter( "nicknames", true );
-                    ftw.write( name );
-                    ftw.write( win );
-                    ftw.write( lose + "\n" );
-                    ftw.write( " \n" );
-                    ftw.write( " \n" );
+                    ftw.append( name );
+                    String lwStr=String.valueOf( win );
+                    ftw.append(lwStr);
+                    lwStr=String.valueOf(lose);
+                    ftw.append( lwStr + "\n" );
+                    ftw.append( " \n" );
+                    ftw.append( " \n" );
                 } catch (IOException ioe) {
                     System.err.println( "IOException" + ioe.getMessage() );
 
@@ -344,15 +387,6 @@ public class nickname<Arraylist> {
         return nam;
 
     }
-public static void main(String Args[]) throws IOException {
-        nickname nik=new nickname("fok");
-        ArrayList<String> po=new ArrayList<String>();
-        po=nik.playersNames();
-        for(int i=0;i<po.size();i++){
-            System.out.println( po.get( i ) );
-        }
-
-}
 
 
 

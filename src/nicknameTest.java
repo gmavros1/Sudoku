@@ -22,10 +22,6 @@ public class nicknameTest {
         boolean result=nik.playedKiller(19);
         assertEquals( expR,result );
     }
-    @Test
-    public void testNewDataClassic(){
-        nik=new nickname("Loukritia");
 
 
-    }
 }
