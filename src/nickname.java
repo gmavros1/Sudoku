@@ -137,8 +137,13 @@ public class nickname<Arraylist> {
                             inpuf.append( leaf );//dui
                             inpuf.append( '\n' );
                             leaf = puf.readLine();
-                            inpuf.append( leaf ).append( " " ).append( i );//νέα δεδομένα για classic
-                            inpuf.append( '\n' );
+                            if(!(leaf.equals(""))) {
+                                inpuf.append( leaf ).append( " " ).append( i );//νέα δεδομένα για classic
+                                inpuf.append( '\n' );
+                            }else{
+                                inpuf.append( i );//νέα δεδομένα για classic
+                                inpuf.append( '\n' );
+                            }
                             leaf = puf.readLine();
                             inpuf.append( leaf );//δεδομένα killer
                             inpuf.append( '\n' );
@@ -172,10 +177,14 @@ public class nickname<Arraylist> {
             } else {
                 try {
                     FileWriter ftw = new FileWriter( "nicknames", true );
-                    ftw.write( name + "\n" );
-                    ftw.write( " \n" );
-                    ftw.write( i );
-                    ftw.write( " \n" );
+                    ftw.append(name);
+                    ftw.append("\n");
+                    ftw.append( "0 0\n" );
+                    String iStr=String.valueOf( i );
+                    ftw.append(iStr);
+                    ftw.append( " \n" );
+                    ftw.flush();
+                    ftw.close();
                 } catch (IOException ioe) {
                     System.err.println( "IOException" + ioe.getMessage() );
 
@@ -195,17 +204,26 @@ public class nickname<Arraylist> {
                     String leaf;
                     while ((leaf = puf.readLine()) != null) {
                         if (leaf.equals( name )) {
-
+                            inpuf.append( '\n' );
+                            System.out.println( name );
                             inpuf.append( leaf );//όνομα
+                            System.out.println( leaf );
                             inpuf.append( '\n' );
                             leaf = puf.readLine();
                             inpuf.append( leaf );//duidoku
+                            System.out.println( leaf );
                             inpuf.append( '\n' );
                             leaf = puf.readLine();
                             inpuf.append( leaf );//classic
+                            System.out.println( leaf );
                             inpuf.append( '\n' );
                             leaf = puf.readLine();
-                            inpuf.append( leaf ).append( " " ).append( i );//killer
+                            if(!(leaf.equals(""))) {
+                                inpuf.append( leaf ).append( " " ).append( i );//killer
+                            }else {
+                                inpuf.append( i );
+                            }
+
                             inpuf.append( '\n' );
                         }
                     }
@@ -214,11 +232,16 @@ public class nickname<Arraylist> {
                 }
             } else {
                 try {
-                    FileWriter ftw = new FileWriter( "classic", true );
-                    ftw.write( name + "\n" );
-                    ftw.write( '\n' );
-                    ftw.write( " \n" );
-                    ftw.write( i + "\n" );
+                    FileWriter ftw = new FileWriter( "nicknames", true );
+                    ftw.append(name);
+                    ftw.append("\n");
+                    ftw.append( "0 0\n" );
+                    ftw.append( " \n" );
+                    String iStr=String.valueOf( i );
+                    ftw.append(iStr);
+                    ftw.append( " \n" );
+                    ftw.flush();
+                    ftw.close();
                 } catch (IOException ioe) {
                     System.err.println( "IOException" + ioe.getMessage() );
 
@@ -316,16 +339,19 @@ public class nickname<Arraylist> {
             }
         puf.close();
         } catch(Exception e){
-            System.out.println( "PROBLEeM HERE" );
+            System.out.println( "PROBLEM HERE" );
         }
         return nam;
 
     }
 public static void main(String Args[]) throws IOException {
-        nickname nik=new nickname("Loukritia");
-        boolean flag;
-        nik.playedClassic(1);
-        nik.newDataClassic( 27);
+        nickname nik=new nickname("fok");
+        ArrayList<String> po=new ArrayList<String>();
+        po=nik.playersNames();
+        for(int i=0;i<po.size();i++){
+            System.out.println( po.get( i ) );
+        }
+
 }
 
 
