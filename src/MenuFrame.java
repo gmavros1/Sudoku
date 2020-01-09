@@ -262,8 +262,9 @@ public class MenuFrame implements ActionListener {
             διαταξη gridbag θα μπαινει ονομα νικες ητες
         */
         int count = 1;
-
-        for (String usernames : name.playersNames()){
+        ArrayList<String> no=new ArrayList<String>( );
+        no=name.playersNames();
+        for (String usernames : no){
 
             JLabel usernm = new JLabel();
             usernm.setText(usernames);

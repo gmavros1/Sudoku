@@ -7,7 +7,7 @@ import java.lang.String;
 
 
 
-public class nickname<Arraylist> {
+public class nickname {
     public String name;
 
     /**
