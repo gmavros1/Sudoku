@@ -98,17 +98,21 @@ public class nickname {
                         sto = puf.readLine();
                         sto = puf.readLine();
                         String[] u = puf.readLine().trim().split( " " );
-                        for (int j = 0; j < u.length; j++) {
-                            if ((Integer.parseInt( u[j] )) == i) {
-                                puf.close();
-                                return false;
+                            for (int j = 0; j < u.length; j++) {
+                                if(!(u[j].equals( "" ))) {
+                                    if ((Integer.parseInt( u[j] )) == i) {
+                                        puf.close();
+                                        return false;
+                                    }
+                                }
                             }
                         }
                     }
-                }
                 puf.close();
             }
-        }
+
+            }
+
         return true;
     }
 

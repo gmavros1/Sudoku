@@ -1,5 +1,7 @@
 import jdk.jfr.StackTrace;
 import org.junit.Test;
+
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -44,7 +46,7 @@ public class GeneralTest {
         expMatrix[1][0]='B';
         expMatrix[1][1]='A';
         char[][] result=general.Wordoku( matrix,2 );
-
+        assertArrayEquals(expMatrix,result);
 
     }
 
