@@ -223,8 +223,8 @@ public class MenuFrame implements ActionListener {
      * προσθήκη στοιχειων σε διάταξη gridBag
      */
     public void scoresDialog(){
-        nickname name = new nickname();
         JDialog scoresD = new JDialog();
+        nickname name = new nickname();
 
         scoresD.setTitle("Scores");
         scoresD.setSize(600, 600);
@@ -258,11 +258,11 @@ public class MenuFrame implements ActionListener {
         scoresD.add(looses, gc);
 
         /*
-            εισαγωγή loop του array των ονομάτων στο οπίο σε καθε σειρα στην
+            εισαγωγή loop του array των ονομάτων στο οπoίο σε καθε σειρα στην
             διαταξη gridbag θα μπαινει ονομα νικες ητες
-        */
+*/
         int count = 1;
-        ArrayList<String> no=new ArrayList<String>( );
+        ArrayList<String> no;
         no=name.playersNames();
         for (String usernames : no){
 
@@ -275,19 +275,20 @@ public class MenuFrame implements ActionListener {
             JLabel loosess = new JLabel();
             loosess.setText(String.valueOf(name.giveScore(usernames)[1]));
 
-
+            /*
             gc.gridx = 0;
             gc.gridy = count;
             optionsD.add(usernm, gc);
 
             gc.gridx = 1;
             gc.gridy = count;
-            optionsD.add(wins, gc);
+            optionsD.add(winings, gc);
 
             gc.gridx = 2;
             gc.gridy = count;
-            optionsD.add(looses, gc);
+            optionsD.add(loosess, gc);
 
+             */
             count+=1;
 
         }
@@ -343,8 +344,10 @@ public class MenuFrame implements ActionListener {
                     wordoku = false;
                     wurdokuButton.setText("OFF");
                 }
+                break;
             case "Scores" :
                 this.scoresDialog();
+                break;
         }
     }
 
