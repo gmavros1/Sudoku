@@ -21,8 +21,8 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
      * @param w επιλογη wordoku
      * @param u username χρήστη
      */
-    KillerFrame(boolean w, String u) throws IOException {
-        super(9, 3);
+    KillerFrame(boolean w, String u, String l, String c) throws IOException {
+        super(9, 3, l, c);
         wordoku = w;
         frame.setTitle("Killer Sudoku");
         killer = new Killer();

@@ -21,8 +21,8 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
      * @param w επιλογη wordoku
      * @param u username χρήστη
      */
-    DuidokuFrame(boolean w, String u){
-        super(4, 2);
+    DuidokuFrame(boolean w, String u, String l, String c){
+        super(4, 2, l, c);
         wordoku = w;
         frame.setTitle("Duidoku");
         duidoku = new Duidoku();

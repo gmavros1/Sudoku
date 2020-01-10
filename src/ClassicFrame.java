@@ -20,8 +20,8 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
      * @param w επιλογη wordoku
      * @param u username χρήστη
      */
-    ClassicFrame(boolean w, String u) throws IOException {
-        super(9, 3);
+    ClassicFrame(boolean w, String u, String l, String c) throws IOException {
+        super(9, 3, l, c);
         wordoku = w;
         frame.setTitle("Classic Sudoku");
         classic = new Classic();

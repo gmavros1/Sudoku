@@ -1,3 +1,5 @@
+import i18n.Internationalization;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,6 +13,12 @@ import java.util.ArrayList;
  */
 public class MenuFrame implements ActionListener {
 
+    private Internationalization translate;
+    String lang;
+    String country;
+
+    private JLabel languageLabel ;
+    private JButton languageButton ;
 
     private JFrame frame;
     private JButton classic;
@@ -36,19 +44,24 @@ public class MenuFrame implements ActionListener {
      * κλήση συνάρτησης για την δημιουργεια του frame και την εισαγωγή στοιχείων σε αυτό
      */
     public MenuFrame(){
-            classic = new JButton("Classic Sudoku");
-            classic.setBackground(Color.pink);
 
-            killer = new JButton("Killer Sudoku");
-            killer.setBackground(Color.gray);
+        lang = "en";
+        country = "UK";
+        translate = new Internationalization(lang, country);
 
-            duidoku = new JButton("Duidoku");
-            duidoku.setBackground(Color.CYAN);
+        classic = new JButton("Classic Sudoku");
+        classic.setBackground(Color.pink);
+        classic.setActionCommand( "Classic Sudoku" );
 
-            wordoku = false;
-            wurdokuButton.setText("OFF");
+        killer = new JButton("Killer Sudoku");
+        killer.setBackground(Color.gray);
+        classic.setActionCommand( "Killer Sudoku" );
 
+        duidoku = new JButton("Duidoku");
+        duidoku.setBackground(Color.CYAN);
 
+        wordoku = false;
+        wurdokuButton.setText("OFF");
 
         assert false;
         setUsername.setText("Current username : " );
@@ -69,12 +82,19 @@ public class MenuFrame implements ActionListener {
      * @param w επιλογη wordoku
      * @param u username χρήστη
      */
-    public MenuFrame(boolean w, String u){
-        classic = new JButton("Classic Sudoku");
-        classic.setBackground(Color.pink);
+    public MenuFrame(boolean w, String u, String l, String c){
 
-        killer = new JButton("Killer Sudoku");
+        lang = l;
+        country = c;
+        translate = new Internationalization(lang, country);
+
+        classic = new JButton(translate.getTranslatedMessage( "Classic" ));
+        classic.setBackground(Color.pink);
+        classic.setActionCommand( "Classic Sudoku" );
+
+        killer = new JButton(translate.getTranslatedMessage( "Killer" ));
         killer.setBackground(Color.gray);
+        killer.setActionCommand( "Killer Sudoku" );
 
         duidoku = new JButton("Duidoku");
         duidoku.setBackground(Color.CYAN);
@@ -88,7 +108,7 @@ public class MenuFrame implements ActionListener {
         username = u;
 
         assert false;
-        setUsername.setText("Current username : " + username);
+        setUsername.setText(translate.getTranslatedMessage( "Current_username" ) + username);
 
         scores = new JButton("Scores");
         scores.setActionCommand("Scores");
@@ -167,6 +187,10 @@ public class MenuFrame implements ActionListener {
         optionsD = new JDialog();
         wrdku = new JLabel();
 
+        languageLabel = new JLabel("Language");
+        languageButton = new JButton("EN");
+        languageButton.setActionCommand( "lB" );
+
         optionsD.setTitle("Options");
         optionsD.setSize(600, 200);
         optionsD.setLocationRelativeTo(null);
@@ -201,6 +225,15 @@ public class MenuFrame implements ActionListener {
         gc.gridy = 1;
         optionsD.add(writeUsername, gc);
 
+        gc.gridx = 0;
+        gc.gridy = 2;
+        optionsD.add( languageLabel, gc );
+
+        gc.gridx = 1;
+        gc.gridy = 2;
+        optionsD.add( languageButton, gc );
+
+        languageButton.addActionListener( this );
 
         /*
          * Σε κάθε εισαγωγή ονόματος θα ανανεώνεται το label του username κατάλληλα
@@ -316,7 +349,7 @@ public class MenuFrame implements ActionListener {
             case "Classic Sudoku":
 
                 try {
-                    ClassicFrame Classic = new ClassicFrame(wordoku, username);
+                    ClassicFrame Classic = new ClassicFrame(wordoku, username, lang, country);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -324,14 +357,14 @@ public class MenuFrame implements ActionListener {
                 break;
             case "Killer Sudoku":
                 try {
-                    KillerFrame killer = new KillerFrame(wordoku, username);
+                    KillerFrame killer = new KillerFrame(wordoku, username, lang, country);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
                 frame.dispose();
                 break;
             case "Duidoku":
-                DuidokuFrame duidoku = new DuidokuFrame(wordoku, username);
+                DuidokuFrame duidoku = new DuidokuFrame(wordoku, username, lang, country);
                 frame.dispose();
                 break;
             case "Options":
@@ -349,6 +382,22 @@ public class MenuFrame implements ActionListener {
                 break;
             case "Scores" :
                 this.scoresDialog();
+                break;
+            case "lB":
+                if(lang.equals( "en" )){
+                    languageButton.setText( "GR" );
+                    lang = "el";
+                    country = "GR";
+                    MenuFrame newframe = new MenuFrame( wordoku, username, lang, country );
+                    frame.dispose();
+                }
+                else if (lang.equals( "el" )){
+                    languageButton.setText( "EN" );
+                    lang = "en";
+                    country = "UK";
+                    MenuFrame newframe = new MenuFrame( wordoku, username, lang, country );
+                    frame.dispose();
+                }
                 break;
         }
     }

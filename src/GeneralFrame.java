@@ -1,3 +1,5 @@
+import i18n.Internationalization;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,8 +15,11 @@ import static java.util.ResourceBundle.*;
  * Δημιουργεία frame από το οποίο θα κλειρωνομούν οι κλάσεις frame των classic killer kai diudoku
  */
 public class GeneralFrame implements ActionListener {
-    Locale greek;
-    ResourceBundle bundle;
+
+    private Internationalization translate;
+    String lang;
+    String country;
+
     protected JFrame frame; //γενικό frame
     protected JButton[][] board; //δισδιαστατος πινακας κουμπιών που διαδραματίζει τον ρόλο των κελιών του sudoku
     protected int GAP; // Χρήσιμοποιείται στην διαμόρφωση κενών, διαχωρίζοντας έτσι τα υποτετράγωνα του πίνακα sudoku
@@ -35,7 +40,11 @@ public class GeneralFrame implements ActionListener {
      * @param s τιμή που θέτουμε στην μεταβλητή side
      * @param sqr τιμή που θέτουμε στην μεταβλητή sqrSide
      */
-    GeneralFrame(int s, int sqr){
+    GeneralFrame(int s, int sqr, String l, String c){
+        lang = l;
+        country = c;
+        translate = new Internationalization(lang, country);
+
         side = s;
         sqrSide = sqr;
         GAP = sqr;
@@ -123,7 +132,7 @@ public class GeneralFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String choose = e.getActionCommand();
         if (choose.equals("New game")) {
-            MenuFrame menu = new MenuFrame(wordoku, username);
+            MenuFrame menu = new MenuFrame(wordoku, username, lang, country);
             frame.dispose();
         }
     }
