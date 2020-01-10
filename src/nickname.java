@@ -287,8 +287,10 @@ public class nickname {
      */
     public void newDataDui(int win, int lose) throws IOException {
         if (name != null) {
+            System.out.println( "hah" );
             if (hasPlayed()) {
                 try {
+                    System.out.println( "hjjjah" );
                     int[] score = new int[2];
                     BufferedReader puf = new BufferedReader( new FileReader( "nicknames" ) );
                     StringBuffer inpuf = new StringBuffer();
@@ -336,14 +338,15 @@ public class nickname {
                 }
             } else {
                 try {
+
                     FileWriter ftw = new FileWriter( "nicknames", true );
-                    ftw.append( name );
-                    String lwStr=String.valueOf( win );
-                    ftw.append(lwStr);
-                    lwStr=String.valueOf(lose);
-                    ftw.append( lwStr + "\n" );
-                    ftw.append( " \n" );
-                    ftw.append( " \n" );
+                    ftw.append(name);
+                    ftw.append("\n");
+                    ftw.append( win+" "+lose+" "+"\n" );
+                    ftw.append( "\n" );
+                    ftw.append( "\n" );
+                    ftw.flush();
+                    ftw.close();
                 } catch (IOException ioe) {
                     System.err.println( "IOException" + ioe.getMessage() );
 
@@ -389,6 +392,11 @@ public class nickname {
             System.out.println( "PROBLEM HERE" );
         }
         return nam;
+
+    }
+    public static void main(String Args[]) throws IOException {
+        nickname paparia=new nickname("papakia");
+        paparia.newDataKiller(1);
 
     }
 

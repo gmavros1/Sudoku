@@ -12,6 +12,7 @@ import java.io.IOException;
 public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyListener {
 
     Duidoku duidoku;
+    nickname newData;
     private JLabel move = new JLabel();
 
     /**
@@ -27,6 +28,9 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
         frame.setTitle("Duidoku");
         duidoku = new Duidoku();
         username = u;
+
+        newData = new nickname( username );
+
         this.makeFrame();
 
 
@@ -88,7 +92,7 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
      * Έπειτα γίνετια η ίδια διαδικασία για τον έλεγχο της νίκης.
      */
     @Override
-    public void keyTyped(KeyEvent k) {
+    public void keyTyped(KeyEvent k)  {
         int element = k.getKeyChar() - '0';
 
 
@@ -117,10 +121,8 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
                 d.setVisible(true);
                 flag = true;
 
-                nickname winning = new nickname(username);
                 try {
-                    winning.newDataDui(1, 0);
-                    System.out.println("Pernaen oi nikes");
+                    newData.newDataDui(1, 0);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -147,10 +149,8 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
                     d.setLocationRelativeTo(null);
                     d.setVisible(true);
 
-                    nickname winning = new nickname(username);
                     try {
-                        winning.newDataDui(0, 1);
-                        System.out.println("Pernaen oi httes");
+                        newData.newDataDui(0, 1);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
