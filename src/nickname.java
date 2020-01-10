@@ -125,7 +125,7 @@ public class nickname {
      * @throws IOException
      */
     public void newDataClassic(int i) throws IOException {
-        System.out.println( "onooooo" );
+        System.out.println( "onooo" );
         if (name != null) {
             if (hasPlayed()) {
                 try {
