@@ -37,7 +37,7 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
      * προστήθονται actionlisteners για κάθε κουμπί και ως action command η συντεταγμένη του ως στρινγκ.
      */
     private void makeFrame(){
-        JLabel help = new JLabel("  For help hold 'H' ->  ");
+        JLabel help = new JLabel(translate.getTranslatedMessage( "helpp" ));
         mb.add(help);
         mb.add(move);
 

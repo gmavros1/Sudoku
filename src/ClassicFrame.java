@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.Color;
@@ -23,7 +24,7 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
     ClassicFrame(boolean w, String u, String l, String c) throws IOException {
         super(9, 3, l, c);
         wordoku = w;
-        frame.setTitle("Classic Sudoku");
+        frame.setTitle(translate.getTranslatedMessage( "Classic" ));
         classic = new Classic();
         classic.files();
         username = u;
@@ -38,9 +39,10 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
      */
     private void makeFrame(){
 
-        check = new JButton("Check");
+        check = new JButton(translate.getTranslatedMessage( "Check" ));
+        check.setActionCommand( "Check" );
         mb.add(check);
-        JLabel help = new JLabel("  For help hold 'H' ->  ");
+        JLabel help = new JLabel(translate.getTranslatedMessage( "helpp" ));
         mb.add(help);
         mb.add(move);
 
@@ -81,7 +83,7 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
         if (choose.equals("Check")){
             if (classic.EndOfGame()){
                 JDialog d = new JDialog(frame,"WINNER WINNER CHICKEN DINNER");
-                JLabel l = new JLabel("YOU WON !!!");
+                JLabel l = new JLabel( translate.getTranslatedMessage( "youwon" ) );
                 d.add(l, BorderLayout.CENTER);
                 d.setSize(400, 50);
                 d.setLocationRelativeTo(null);
@@ -94,7 +96,7 @@ public class ClassicFrame extends GeneralFrame implements ActionListener, KeyLis
             }
             else {
                 JDialog d = new JDialog(frame,"LOSER LOSER CHICKEN DINNER ? ");
-                JLabel l = new JLabel("NEXT TIME ...");
+                JLabel l = new JLabel(translate.getTranslatedMessage( "nextime" ));
                 d.add(l, BorderLayout.CENTER);
                 d.setSize(400, 50);
                 d.setLocationRelativeTo(null);

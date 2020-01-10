@@ -110,7 +110,7 @@ public class MenuFrame implements ActionListener {
         assert false;
         setUsername.setText(translate.getTranslatedMessage( "Current_username" ) + username);
 
-        scores = new JButton("Scores");
+        scores = new JButton(translate.getTranslatedMessage( "Scores" ));
         scores.setActionCommand("Scores");
 
         this.makeFrame();
@@ -127,7 +127,8 @@ public class MenuFrame implements ActionListener {
 
         Container contentPane = frame.getContentPane();
 
-        JButton options = new JButton("Options");
+        JButton options = new JButton(translate.getTranslatedMessage( "Options" ));
+        options.setActionCommand( "Options" );
 
         JMenuBar mb = new JMenuBar();
         mb.add(options);
@@ -187,8 +188,8 @@ public class MenuFrame implements ActionListener {
         optionsD = new JDialog();
         wrdku = new JLabel();
 
-        languageLabel = new JLabel("Language");
-        languageButton = new JButton("EN");
+        languageLabel = new JLabel(translate.getTranslatedMessage( "Language" ));
+        languageButton = new JButton(country);
         languageButton.setActionCommand( "lB" );
 
         optionsD.setTitle("Options");
@@ -243,7 +244,7 @@ public class MenuFrame implements ActionListener {
                                              @Override
                                              public void actionPerformed(ActionEvent actionEvent) {
                                                  username = writeUsername.getText();
-                                                 setUsername.setText("Current username : " + username);
+                                                 setUsername.setText(translate.getTranslatedMessage( "Current_username" ) + username);
                                                  writeUsername.setText("");
 
                                              }
@@ -261,7 +262,7 @@ public class MenuFrame implements ActionListener {
         JDialog scoresD = new JDialog();
         nickname name = new nickname(username);
 
-        scoresD.setTitle("Scores");
+        scoresD.setTitle(translate.getTranslatedMessage( "Scores" ));
         scoresD.setSize(600, 600);
         scoresD.setLocationRelativeTo(null);
 
@@ -272,13 +273,13 @@ public class MenuFrame implements ActionListener {
         gc.weighty = 0.5;
 
         JLabel usernAm = new JLabel();
-        usernAm.setText("Usernames");
+        usernAm.setText(translate.getTranslatedMessage( "Username" ));
 
         JLabel wins = new JLabel();
-        wins.setText("Wins");
+        wins.setText(translate.getTranslatedMessage( "wins" ));
 
         JLabel looses = new JLabel();
-        looses.setText("Defeats");
+        looses.setText(translate.getTranslatedMessage( "defeats" ));
 
         gc.gridx = 0;
         gc.gridy = 0;

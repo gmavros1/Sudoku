@@ -16,9 +16,9 @@ import static java.util.ResourceBundle.*;
  */
 public class GeneralFrame implements ActionListener {
 
-    private Internationalization translate;
-    String lang;
-    String country;
+    protected Internationalization translate;
+    private String lang;
+    private String country;
 
     protected JFrame frame; //γενικό frame
     protected JButton[][] board; //δισδιαστατος πινακας κουμπιών που διαδραματίζει τον ρόλο των κελιών του sudoku
@@ -77,7 +77,8 @@ public class GeneralFrame implements ActionListener {
         contentPaneMain.setSize(700, 700);
 
         mb = new JMenuBar();
-        ng = new JButton("New game");
+        ng = new JButton(translate.getTranslatedMessage( "New" ));
+        ng.setActionCommand( "New game" );
         mb.add(ng);
 
 

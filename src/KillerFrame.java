@@ -24,7 +24,7 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
     KillerFrame(boolean w, String u, String l, String c) throws IOException {
         super(9, 3, l, c);
         wordoku = w;
-        frame.setTitle("Killer Sudoku");
+        frame.setTitle(translate.getTranslatedMessage( "Killer" ));
         killer = new Killer();
         killer.files();
         username = u;
@@ -37,9 +37,10 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
      * Καλείται η συνάρτηση colornums.
      */
     private void makeFrame(){
-        check = new JButton("Check");
+        check = new JButton(translate.getTranslatedMessage( "Check" ));
+        check.setActionCommand( "Check" );
         mb.add(check);
-        JLabel help = new JLabel("  For help hold 'h' ->  ");
+        JLabel help = new JLabel(translate.getTranslatedMessage( "helpp" ));
         mb.add(help);
         mb.add(move);
 
@@ -158,7 +159,7 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
         if (choose.equals("Check")){
             if (killer.EndOfGame()){
                 JDialog d = new JDialog(frame,"WINNER WINNER CHICKEN DINNER");
-                JLabel l = new JLabel("YOU WON !!!");
+                JLabel l = new JLabel( translate.getTranslatedMessage( "youwon" ) );
                 d.add(l, BorderLayout.CENTER);
                 d.setSize(400, 50);
                 d.setLocationRelativeTo(null);
@@ -171,7 +172,7 @@ public class KillerFrame extends GeneralFrame implements ActionListener, KeyList
             }
             else {
                 JDialog d = new JDialog(frame,"LOSER LOSER CHICKEN DINNER ? ");
-                JLabel l = new JLabel(" NEXT TIME  ...");
+                JLabel l = new JLabel(translate.getTranslatedMessage( "nextime" ));
                 d.add(l, BorderLayout.CENTER);
                 d.setSize(400, 50);
                 d.setLocationRelativeTo(null);
