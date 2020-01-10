@@ -117,9 +117,10 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
                 d.setVisible(true);
                 flag = true;
 
-                nickname winning = new nickname();
+                nickname winning = new nickname(username);
                 try {
                     winning.newDataDui(1, 0);
+                    System.out.println("Pernaen oi nikes");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -146,9 +147,10 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
                     d.setLocationRelativeTo(null);
                     d.setVisible(true);
 
-                    nickname winning = new nickname();
+                    nickname winning = new nickname(username);
                     try {
                         winning.newDataDui(0, 1);
+                        System.out.println("Pernaen oi httes");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

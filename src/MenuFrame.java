@@ -48,6 +48,8 @@ public class MenuFrame implements ActionListener {
             wordoku = false;
             wurdokuButton.setText("OFF");
 
+
+
         assert false;
         setUsername.setText("Current username : " );
 
@@ -224,7 +226,7 @@ public class MenuFrame implements ActionListener {
      */
     public void scoresDialog(){
         JDialog scoresD = new JDialog();
-        nickname name = new nickname();
+        nickname name = new nickname(username);
 
         scoresD.setTitle("Scores");
         scoresD.setSize(600, 600);
@@ -275,20 +277,20 @@ public class MenuFrame implements ActionListener {
             JLabel loosess = new JLabel();
             loosess.setText(String.valueOf(name.giveScore(usernames)[1]));
 
-            /*
+            /**/
             gc.gridx = 0;
             gc.gridy = count;
-            optionsD.add(usernm, gc);
+            scoresD.add(usernm, gc);
 
             gc.gridx = 1;
             gc.gridy = count;
-            optionsD.add(winings, gc);
+            scoresD.add(winings, gc);
 
             gc.gridx = 2;
             gc.gridy = count;
-            optionsD.add(loosess, gc);
+            scoresD.add(loosess, gc);
 
-             */
+
             count+=1;
 
         }
