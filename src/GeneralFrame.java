@@ -122,7 +122,7 @@ public class GeneralFrame implements ActionListener {
      */
     public void actionPerformed(ActionEvent e) {
         String choose = e.getActionCommand();
-        if (choose.equals("New Game")) {
+        if (choose.equals("New game")) {
             MenuFrame menu = new MenuFrame(wordoku, username);
             frame.dispose();
         }
