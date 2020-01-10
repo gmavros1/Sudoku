@@ -122,7 +122,8 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
                 flag = true;
 
                 try {
-                    newData.newDataDui(1, 0);
+                    if(username!=null)
+                        newData.newDataDui(1, 0);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -150,7 +151,8 @@ public class DuidokuFrame extends GeneralFrame implements ActionListener, KeyLis
                     d.setVisible(true);
 
                     try {
-                        newData.newDataDui(0, 1);
+                        if(username!=null)
+                            newData.newDataDui(0, 1);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

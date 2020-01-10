@@ -338,7 +338,7 @@ public class nickname {
                 }
             } else {
                 try {
-
+                   
                     FileWriter ftw = new FileWriter( "nicknames", true );
                     ftw.append(name);
                     ftw.append("\n");

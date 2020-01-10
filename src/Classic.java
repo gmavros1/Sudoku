@@ -29,7 +29,7 @@ public class Classic extends Puzzle{
             do {
                 c = (ono.nextInt(180) / 18) * 18;
             } while (c == 0);
-        }while(!(player.playedKiller(c)));
+        }while(!(player.playedClassic(c)));
         player.newDataClassic(c);
         for(int k=0;k<c;k++){
             puf.readLine();

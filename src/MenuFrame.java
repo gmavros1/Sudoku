@@ -243,9 +243,13 @@ public class MenuFrame implements ActionListener {
         writeUsername.addActionListener(new ActionListener() {
                                              @Override
                                              public void actionPerformed(ActionEvent actionEvent) {
-                                                 username = writeUsername.getText();
-                                                 setUsername.setText(translate.getTranslatedMessage( "Current_username" ) + username);
-                                                 writeUsername.setText("");
+
+                                                     username = writeUsername.getText();
+                                                     if(username!=null){
+                                                     setUsername.setText(translate.getTranslatedMessage( "Current_username" ) + " : "+ username);
+                                                     writeUsername.setText("");
+
+                                                 }
 
                                              }
                                          });
