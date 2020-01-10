@@ -394,11 +394,6 @@ public class nickname {
         return nam;
 
     }
-    public static void main(String Args[]) throws IOException {
-        nickname paparia=new nickname("papakia");
-        paparia.newDataKiller(1);
-
-    }
 
 
 

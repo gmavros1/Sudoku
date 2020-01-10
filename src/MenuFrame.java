@@ -55,7 +55,7 @@ public class MenuFrame implements ActionListener {
 
         killer = new JButton("Killer Sudoku");
         killer.setBackground(Color.gray);
-        classic.setActionCommand( "Killer Sudoku" );
+        killer.setActionCommand( "Killer Sudoku" );
 
         duidoku = new JButton("Duidoku");
         duidoku.setBackground(Color.CYAN);
